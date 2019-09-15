@@ -1,4 +1,4 @@
-package chap02;
+package com.practice.chap02.array;
 
 import java.util.Scanner;
 import java.util.stream.IntStream;

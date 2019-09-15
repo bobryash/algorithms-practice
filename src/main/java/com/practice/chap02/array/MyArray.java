@@ -1,4 +1,4 @@
-package chap02;
+package com.practice.chap02.array;
 
 public class MyArray {
 

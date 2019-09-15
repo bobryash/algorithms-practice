@@ -1,4 +1,4 @@
-package chap02;
+package com.practice.chap02.array;
 
 // orderedArray.java
 // demonstrates ordered array class

@@ -1,15 +1,15 @@
-package chap02;
+package com.practice.chap02.array;
 
-// highArray.java
+// HighLevelArray.java
 // demonstrates array class with high-level interface
 // to run this program: C>java HighArrayApp
 ////////////////////////////////////////////////////////////////
-class HighArray
+class HighLevelArray
    {
    private long[] a;                 // ref to array a
    private int nElems;               // number of data items
    //-----------------------------------------------------------
-   public HighArray(int max)         // constructor
+   public HighLevelArray(int max)         // constructor
       {
       a = new long[max];                 // create the array
       nElems = 0;                        // no items yet
@@ -57,15 +57,15 @@ class HighArray
       System.out.println("");
       }
    //-----------------------------------------------------------
-   }  // end class HighArray
+   }  // end class HighLevelArray
 ////////////////////////////////////////////////////////////////
 class HighArrayApp
    {
    public static void main(String[] args)
       {
       int maxSize = 100;            // array size
-      HighArray arr;                // reference to array
-      arr = new HighArray(maxSize); // create the array
+      HighLevelArray arr;                // reference to array
+      arr = new HighLevelArray(maxSize); // create the array
 
       arr.insert(77);               // insert 10 items
       arr.insert(99);
