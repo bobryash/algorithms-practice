@@ -1,9 +1,9 @@
 package com.practice.chap05.linkedlist;
 
-class DoublyLinkedList {
+public class DoublyLinkedList {
 
-    private Link first; // Ссылка на первый элемент списка
-    private Link last; // Ссылка на последний элемент списка
+    public Link first; // Ссылка на первый элемент списка
+    public Link last; // Ссылка на последний элемент списка
 
     // -------------------------------------------------------------
     public DoublyLinkedList() {// Конструктор
@@ -137,7 +137,7 @@ class DoublyLinkedList {
         System.out.println("");
     }
 
-    class Link {
+    public class Link {
         public long dData; // Данные
         public Link next; // Следующий элемент в списке
         public Link previous; // Предыдущий элемент в списке
