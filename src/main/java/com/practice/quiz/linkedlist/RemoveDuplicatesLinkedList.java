@@ -7,17 +7,17 @@ import java.util.Set;
 
 public class RemoveDuplicatesLinkedList {
 
-    public static void deleteDups(DoublyLinkedList.Link n) {
+    public static void deleteDups(DoublyLinkedList.Link link) {
         Set set = new HashSet();
         DoublyLinkedList.Link previous = null;
-        while (n != null) {
-            if (set.contains(n.dData)) {
-                previous.next = n.next;
+        while (link != null) {
+            if (set.contains(link.dData)) {
+                previous.next = link.next;
             } else {
-                set.add(n.dData);
-                previous = n;
+                set.add(link.dData);
+                previous = link;
             }
-            n = n.next;
+            link = link.next;
         }
     }
 
