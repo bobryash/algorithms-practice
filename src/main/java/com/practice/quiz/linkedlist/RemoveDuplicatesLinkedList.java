@@ -2,18 +2,19 @@ package com.practice.quiz.linkedlist;
 
 import com.practice.chap05.linkedlist.DoublyLinkedList;
 
-import java.util.Hashtable;
+import java.util.HashSet;
+import java.util.Set;
 
 public class RemoveDuplicatesLinkedList {
 
     public static void deleteDups(DoublyLinkedList.Link n) {
-        Hashtable table = new Hashtable();
+        Set set = new HashSet();
         DoublyLinkedList.Link previous = null;
         while (n != null) {
-            if (table.containsKey(n.dData)) {
+            if (set.contains(n.dData)) {
                 previous.next = n.next;
             } else {
-                table.put(n.dData, true);
+                set.add(n.dData);
                 previous = n;
             }
             n = n.next;
