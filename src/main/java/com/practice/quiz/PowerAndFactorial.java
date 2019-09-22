@@ -27,6 +27,15 @@ public class PowerAndFactorial {
         return result;
     }
 
+    // from the book
+    int factorialBook(int n) {
+        if (n == 0) {
+            return 1;
+        } else {
+            return (n * factorial(n - 1));
+        }
+    }
+
     static int pow(int number, int pow) {
         int result = number;
         for (int i = 1; i < pow; i++) {
@@ -34,5 +43,4 @@ public class PowerAndFactorial {
         }
         return result;
     }
-
 }

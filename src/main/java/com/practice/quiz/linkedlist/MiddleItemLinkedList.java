@@ -33,9 +33,9 @@ public class MiddleItemLinkedList {
       current = current.next;
     }
 
-    if (length % 2 == 1) {
+/*    if (length % 2 == 1) {
       middle = middle.next;
-    }
+    }*/
 
     System.out.println("length of LinkedList: " + length);
     linkedList.displayForward();
