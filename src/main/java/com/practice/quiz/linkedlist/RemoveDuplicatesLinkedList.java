@@ -7,17 +7,33 @@ import java.util.Set;
 
 public class RemoveDuplicatesLinkedList {
 
-    public static void deleteDups(DoublyLinkedList.Link n) {
+    public static void deleteDups(DoublyLinkedList.Link link) {
         Set set = new HashSet();
         DoublyLinkedList.Link previous = null;
-        while (n != null) {
-            if (set.contains(n.dData)) {
-                previous.next = n.next;
+        while (link != null) {
+            if (set.contains(link.dData)) {
+                previous.next = link.next;
             } else {
-                set.add(n.dData);
-                previous = n;
+                set.add(link.dData);
+                previous = link;
             }
-            n = n.next;
+            link = link.next;
+        }
+    }
+
+    /*
+     * since its a sorted list, we can just compare consecutive elements to find
+     * the duplicates
+     */
+    public void removeDuplicates(DoublyLinkedList.Link head) {
+        DoublyLinkedList.Link current = head;
+
+        while (current != null && current.next != null) {
+            if (current.dData == current.next.dData) {
+                current.next = current.next.next;
+            } else {
+                current = current.next;
+            }
         }
     }
 
