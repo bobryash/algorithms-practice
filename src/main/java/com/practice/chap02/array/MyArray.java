@@ -11,8 +11,8 @@ public class MyArray {
     }
 
     boolean find(int v) {
-        for (int j = 0; j <= elemN; j++) {
-            if (array[j] == v) {
+        for (int i = 0; i <= elemN; i++) {
+            if (array[i] == v) {
                 return true;
             }
         }
