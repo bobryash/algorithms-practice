@@ -5,10 +5,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class FirstNonReapetedChar {
+// 3
+public class FirstNonRepeatedChar {
 
     public static void main(String[] args) {
-        System.out.println(firstNonRepeatingChar("adsad"));
+        System.out.println(firstNonRepeatingChar("aammvvgiioo"));
     }
 
     /**
@@ -17,7 +18,7 @@ public class FirstNonReapetedChar {
      * at the end of iteration, first element from List is our first non repeated character from String.
      */
     public static char firstNonRepeatingChar(String word) {
-        Set<Character> repeating = new HashSet<>();
+        List<Character> repeating = new ArrayList<>();
         List<Character> nonRepeating = new ArrayList<>();
         char[] characters = word.toCharArray();
         for (char letter : characters) {

@@ -2,6 +2,7 @@ package com.practice.quiz.string;
 
 import java.util.Arrays;
 
+// 2
 public class AnagramString {
 
     public static boolean iAnagram(String word, String anagram) {

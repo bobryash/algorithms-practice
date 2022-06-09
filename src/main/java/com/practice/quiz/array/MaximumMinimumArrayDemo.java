@@ -10,12 +10,12 @@ import java.util.Arrays;
 public class MaximumMinimumArrayDemo{
 
     public static void main(String args[]) {
-        largestAndSmallest(new int[]{-20, 34, 21, -87, 92,
+        myVer(new int[]{-20, 34, 21, -87, 92,
                 Integer.MAX_VALUE});
-        largestAndSmallest(new int[]{10, Integer.MIN_VALUE, -2});
-        largestAndSmallest(new int[]{Integer.MAX_VALUE, 40,
+        myVer(new int[]{10, Integer.MIN_VALUE, -2});
+        myVer(new int[]{Integer.MAX_VALUE, 40,
                 Integer.MAX_VALUE});
-        largestAndSmallest(new int[]{1, -1, 0});
+        myVer(new int[]{1, -1, 0});
     }
 
     public static void largestAndSmallest(int[] numbers) {
@@ -32,6 +32,10 @@ public class MaximumMinimumArrayDemo{
         System.out.println("Given integer array : " + Arrays.toString(numbers));
         System.out.println("Largest number in array is : " + largest);
         System.out.println("Smallest number in array is : " + smallest);
+        System.out.println();
     }
 
+    public static void myVer(int[] nums) {
+
+    }
 }

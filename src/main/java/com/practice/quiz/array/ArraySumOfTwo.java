@@ -3,11 +3,13 @@ package com.practice.quiz.array;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * How do you find all pairs of an integer array whose sum is equal to a given number?
+ */
 public class ArraySumOfTwo {
 
     public static void main(String[] args) {
-        ArraySumOfTwo.findPairsBySet(getArray(), 6);
-        //ArraySumOfTwo.findPairsByBruteForce(getArray(), 6);
+        ArraySumOfTwo.findPairsByBruteForce(getArray(), 6);
     }
 
     static void findPairsBySet(int[] array, int sum) {

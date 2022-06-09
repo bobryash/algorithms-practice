@@ -52,20 +52,7 @@ public class ArrayDuplicateRemoving {
     }
 
     public static int[] myRem(int[] old) {
-        Arrays.sort(old);
-        int[] result = new int[old.length];
-
-        int previous = old[0];
-        result[0] = previous;
-
-        for (int i = 1; i < old.length; i++) {
-            int current = old[i];
-            if (current != previous) {
-                result[i] = current;
-            }
-            previous = current;
-        }
-        return result;
+        return new int[3];
     }
 
 }

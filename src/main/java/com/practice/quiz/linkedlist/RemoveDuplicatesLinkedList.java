@@ -36,7 +36,6 @@ public class RemoveDuplicatesLinkedList {
             }
         }
     }
-
     public static void main(String[] args) {
         DoublyLinkedList linkedList = new DoublyLinkedList();
         linkedList.addFirst(1);

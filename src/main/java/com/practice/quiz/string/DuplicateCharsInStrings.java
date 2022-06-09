@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+// 1
 public class DuplicateCharsInStrings {
 
     public static void main(String args[]) {

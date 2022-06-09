@@ -67,7 +67,7 @@ class MyLinkedList {
         Link newLink = new Link(key); // Создание нового элемента
         Link previous = null; // От начала списка
         Link current = first;
-// До конца списка
+        // До конца списка
         while (current != null && key > current.dData) { // или если key > current,
             previous = current;
             current = current.next; // Перейти к следующему элементу
@@ -82,9 +82,9 @@ class MyLinkedList {
     public Link find(int key) // Поиск элемента с заданным ключом
     { // (предполагается, что список не пуст)
         Link current = first; // Начиная с 'first'
-        while(current.dData != key) // Пока совпадение не найдено
+        while (current.dData != key) // Пока совпадение не найдено
         {
-            if(current.next == null) // Если достигнут конец списка
+            if (current.next == null) // Если достигнут конец списка
                 return null; // и совпадение не найдено
             else // Если еще остались элементы
                 current = current.next; // Перейти к следующему элементу
