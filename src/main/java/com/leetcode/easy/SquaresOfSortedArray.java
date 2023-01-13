@@ -31,6 +31,8 @@ public class SquaresOfSortedArray {
         int length = nums.length;
         int[] result = new int[length];
         int left = 0, right = length - 1;
+        // start from the end because we can only assume the biggest number (- + extremes), since array is sorted.
+        // so we start fill the result array with the biggest number from the end and then start decreasing.
         for (int i = length - 1; i >= 0; i--) {
             if (Math.abs(nums[left]) > Math.abs(nums[right])) {
                 result[i] = nums[left] * nums[left];
