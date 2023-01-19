@@ -1,9 +1,6 @@
 package com.leetcode.medium;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * #3
@@ -31,10 +28,34 @@ import java.util.Set;
 public class LongestSubstringWORepeatingChars {
 
     public static void main(String[] args) {
-        System.out.println(lengthOfLongestSubstring("heeey"));
+        System.out.println(lengthOfLongestSubstring("abcabcbb"));
     }
 
-    public static String lengthOfLongestSubstring(String input) {
+    /**
+     * The outer while loop iterates through the entire string, with the i and j pointers moving along the string one
+     * character at a time. The inner if statement checks if the current character at index j is already in the set.
+     * If it is not, the character is added to the set and the j pointer is incremented.
+     * If the character is already in the set, the first character at index i is removed from the set and the i pointer
+     * is incremented. The value of max is updated with the maximum length of the current substring.
+     */
+    public static int lengthOfLongestSubstring(String s) {
+        int i = 0, j = 0, max = 0;
+        Set<Character> set = new HashSet<>();
+
+        while (j < s.length()) {
+            if (!set.contains(s.charAt(j))) {
+                set.add(s.charAt(j));
+                j++;
+                max = Math.max(max, set.size());
+            } else {
+                set.remove(s.charAt(i));
+                i++;
+            }
+        }
+        return max;
+    }
+
+    public static String lengthOfLongestSubstring1(String input) {
         Map<Character, Integer> visited = new HashMap<>();
         String output = "";
         for (int start = 0, end = 0; end < input.length(); end++) {
@@ -51,7 +72,7 @@ public class LongestSubstringWORepeatingChars {
     }
 
     // Time Complexity: O(n); Space Complexity: O(n)
-    public int lengthOfLongestSubstring1(String s) {
+    public int lengthOfLongestSubstring2(String s) {
 
         /**
          * Recording all visited chars
@@ -98,20 +119,5 @@ public class LongestSubstringWORepeatingChars {
         }
 
         return maxNonDuplicateSubstringLength;
-    }
-
-    public int lengthOfLongestSubstring3(String s) {
-        int i = 0, j = 0, max = 0;
-        Set<Character> set = new HashSet<>();
-
-        while (j < s.length()) {
-            if (!set.contains(s.charAt(j))) {
-                set.add(s.charAt(j++));
-                max = Math.max(max, set.size());
-            } else {
-                set.remove(s.charAt(i++));
-            }
-        }
-        return max;
     }
 }
