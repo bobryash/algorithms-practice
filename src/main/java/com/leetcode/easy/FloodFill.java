@@ -39,56 +39,16 @@ public class FloodFill {
         });
     }
 
+    // with queue (better imo)
     /**
      *
-     * @param image two-dimensional array, represents image
-     * @param sr starting row
-     * @param sc starting column
-     * @param color
-     * @return
+     * @param image original image
+     * @param sr start row
+     * @param sc start column
+     * @param newColor new color integer value
+     * @return flood filled image
      */
-    public static int[][] floodFill(int[][] image, int sr, int sc, int color) {
-        // Avoid infinite loop if the new and old colors are the same
-        if (image[sr][sc] == color) {
-            return image;
-        }
-
-        // Run the fill function starting at the position given
-        fill(image, sr, sc, color, image[sr][sc]);
-        return image;
-    }
-
-    /**
-     *
-     * @param image
-     * @param sr
-     * @param sc
-     * @param color
-     * @param cur  is an integer representing the color of the current pixel
-     */
-    public static void fill(int[][] image, int sr, int sc, int color, int cur) {
-        // If sr is less than 0 or greater equals to the length of image...
-        // Or, If sc is less than 0 or greater equals to the length of image[0]...
-        if (sr < 0 || sr >= image.length || sc < 0 || sc >= image[0].length) {
-            return;
-        }
-
-        // If image[sr][sc] is not equal to previous color...
-        if (cur != image[sr][sc]) {
-            return;
-        }
-
-        // Update the image[sr][sc] as a color...
-        image[sr][sc] = color;
-        // Make four recursive calls to the function with (sr-1, sc), (sr+1, sc), (sr, sc-1) and (sr, sc+1)...
-        fill(image, sr - 1, sc, color, cur);
-        fill(image, sr + 1, sc, color, cur);
-        fill(image, sr, sc - 1, color, cur);
-        fill(image, sr, sc + 1, color, cur);
-    }
-
-
-    public static int[][] floodFill1(int[][] image, int sr, int sc, int newColor) {
+    public static int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
         // Check if the new and old colors are the same
         if (image[sr][sc] == newColor) {
             return image;
@@ -128,5 +88,39 @@ public class FloodFill {
         }
 
         return image;
+    }
+
+
+    // with recursion
+    public static int[][] floodFill1(int[][] image, int sr, int sc, int color) {
+        // Avoid infinite loop if the new and old colors are the same
+        if (image[sr][sc] == color) {
+            return image;
+        }
+
+        // Run the fill function starting at the position given
+        fill(image, sr, sc, color, image[sr][sc]);
+        return image;
+    }
+
+    public static void fill(int[][] image, int sr, int sc, int color, int cur) {
+        // If sr is less than 0 or greater equals to the length of image...
+        // Or, If sc is less than 0 or greater equals to the length of image[0]...
+        if (sr < 0 || sr >= image.length || sc < 0 || sc >= image[0].length) {
+            return;
+        }
+
+        // If image[sr][sc] is not equal to previous color...
+        if (cur != image[sr][sc]) {
+            return;
+        }
+
+        // Update the image[sr][sc] as a color...
+        image[sr][sc] = color;
+        // Make four recursive calls to the function with (sr-1, sc), (sr+1, sc), (sr, sc-1) and (sr, sc+1)...
+        fill(image, sr - 1, sc, color, cur);
+        fill(image, sr + 1, sc, color, cur);
+        fill(image, sr, sc - 1, color, cur);
+        fill(image, sr, sc + 1, color, cur);
     }
 }
