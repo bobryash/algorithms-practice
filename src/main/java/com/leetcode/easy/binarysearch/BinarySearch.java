@@ -1,9 +1,17 @@
-package com.leetcode.easy;
+package com.leetcode.easy.binarysearch;
 
+/**
+ * #704
+ * <p>
+ * Given an array of integers nums which is sorted in ascending order, and an integer target,
+ * write a function to search target in nums. If target exists, then return its index. Otherwise, return -1.
+ * <p>
+ * You must write an algorithm with O(log n) runtime complexity.
+ */
 public class BinarySearch {
 
     public static void main(String[] args) {
-        int[] nums = {-1,2,3,6,9}; // len 5
+        int[] nums = {-1, 2, 3, 6, 9}; // len 5
         System.out.println(search(nums, 9)); // 4
         System.out.println(search(nums, -1)); // 0
         System.out.println(search(nums, 20)); // -1
@@ -16,9 +24,9 @@ public class BinarySearch {
         int curr = 0;
         int pivot = 0;
         while (left <= right) {
-            pivot = (right - left)/2;
+            pivot = (right - left) / 2;
             curr = nums[pivot];
-            System.out.println("before "+left + " " + right + " /" + pivot);
+            System.out.println("before " + left + " " + right + " /" + pivot);
             if (curr == target) {
                 return pivot;
             }
@@ -29,7 +37,7 @@ public class BinarySearch {
             }
             System.out.println("after  " + left + " " + right + "\n");
         }
-        return - 1;
+        return -1;
     }
 
     public static int search(int[] nums, int target) {
@@ -37,7 +45,7 @@ public class BinarySearch {
         int right = nums.length - 1;
         int curr = 0;
         while (left <= right) {
-            int pivot = left + (right - left)/2;
+            int pivot = left + (right - left) / 2;
             curr = nums[pivot];
             if (curr == target) {
                 return pivot;
