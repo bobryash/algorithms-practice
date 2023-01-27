@@ -22,7 +22,10 @@ public class Combinations {
     public static void main(String[] args) {
         List<List<Integer>> result = new Combinations().combine(4, 2);
 
-        System.out.println();
+        result.forEach(list -> {
+            list.forEach(System.out::print);
+            System.out.println();
+        });
     }
 
     // This solution uses a backtracking algorithm to generate all possible combinations of k elements from the set [1, n].
