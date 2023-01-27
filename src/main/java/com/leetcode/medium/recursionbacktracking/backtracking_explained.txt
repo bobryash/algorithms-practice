@@ -1,0 +1,16 @@
+Backtracking is a general algorithmic technique that involves trying out different solutions incrementally,
+by gradually building up the solution, and undoing (or "backtracking" on) the choices that lead to a dead end.
+It is used to solve problems that involve searching through a large number of possible solutions, such as finding
+all possible paths through a maze, or all possible combinations of items in a set.
+
+Backtracking algorithms typically have a recursive structure, where a function calls itself with a modified set of
+input parameters. The function starts with an empty solution, and at each step, it adds a new element to the solution
+and recurses on the next step. If it reaches a point where it can no longer make progress, it backtracks by undoing
+the last choice and trying a different one.
+
+The base case of the recursion is usually when the solution is complete (e.g. all items have been selected, or all
+steps have been taken), in which case the function adds the current solution to the list of all solutions.
+
+Backtracking algorithms can be implemented in many different ways and can be used to solve a wide variety of problems.
+It is an important technique in computer science and is particularly useful for solving problems where the solution
+space is large and complex.
