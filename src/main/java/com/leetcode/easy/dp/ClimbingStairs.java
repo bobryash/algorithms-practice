@@ -1,4 +1,4 @@
-package com.leetcode.easy.dynamic;
+package com.leetcode.easy.dp;
 
 /**
  * #70
