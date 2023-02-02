@@ -1,0 +1,27 @@
+In Java, >> and >>> are both bit shift operators that shift the bits of an integer value to the right.
+
+
+
+The >> operator shifts the bits of an integer to the right, discarding the bits that are shifted past the rightmost bit,
+and filling the leftmost bits with the sign bit. This means that if the original integer was negative, the sign bit
+will be preserved, effectively dividing the value by 2^n (where n is the number of positions being shifted).
+
+Here's an example:
+int a = -10;  // binary representation:  11111111111111111111111111110110
+
+int b = a >> 1;
+// b = -5; binary representation: 11111111111111111111111111111011
+
+
+
+The >>> operator also shifts the bits of an integer to the right, but it always fills the leftmost bits with 0,
+regardless of the sign of the original integer. This means that the sign bit is not preserved and the value is simply
+divided by 2^n (where n is the number of positions being shifted).
+
+Here's an example:
+int a = -10;  // binary representation:  11111111111111111111111111110110
+
+int b = a >>> 1;
+// b = 2147483643; binary representation: 1111111111111111111111111111011
+In this example, the >>> operator has shifted the bits of a to the right by 1 position, discarding the rightmost bit,
+and filling the leftmost bits with 0. The result is a positive integer value.

@@ -58,5 +58,12 @@ ___________________________
 Unsigned Right Shift (>>>) - Similar to the right shift operator, but fills the leftmost bits with zeros
 instead of preserving the sign of the integer.
 
-int a = -5; // binary representation: 1111111111111111111111111111011
-int b = a >>> 1; // b = 2147483642, binary representation: 0111111111111111111111111111011
+int a = -5; // binary representation: 11111111111111111111111111111011
+int b = a >>> 1; // b = 2147483645, binary representation: 1111111111111111111111111111101
+
+__________________________
+even - ends with 0 (even & 1 = 0)
+odd - ends with 1 (odd & 1 = 1)
+
+signed - negative, 0, positive
+unsigned - 0, positive
