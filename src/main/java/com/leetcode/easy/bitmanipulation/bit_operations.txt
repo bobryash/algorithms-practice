@@ -1,0 +1,62 @@
+In Java, the | operator is a binary operator that performs a bitwise OR operation on two integers.
+The bitwise OR operation compares each bit of the first integer to the corresponding bit of the second integer,
+and if either bit is 1, the corresponding result bit is set to 1, otherwise it is set to 0.
+
+int a = 5; // binary representation: 00000000000000000000000000000101
+int b = 3; // binary representation: 00000000000000000000000000000011
+int c = a | b; // c = 7, binary representation: 00000000000000000000000000000111
+
+
+_________________________________________________
+In Java, the & operator is a binary operator that performs a bitwise AND operation on two integers.
+The bitwise AND operation compares each bit of the first integer to the corresponding bit of the second integer,
+and if both bits are 1, the corresponding result bit is set to 1, otherwise it is set to 0.
+
+int a = 5; // binary representation: 00000000000000000000000000000101
+int b = 3; // binary representation: 00000000000000000000000000000011
+int c = a & b; // c = 1, binary representation: 00000000000000000000000000000001
+
+
+
+____________________
+Bitwise XOR (^) - Performs a bitwise exclusive OR operation on two integers,
+setting the result bit to 1 if only one of the corresponding input bits is 1.
+
+int a = 5; // binary representation: 00000000000000000000000000000101
+int b = 3; // binary representation: 00000000000000000000000000000011
+int c = a ^ b; // c = 6, binary representation: 00000000000000000000000000000110
+
+
+
+__________________
+Bitwise NOT (~) - Performs a bitwise NOT operation on an integer, which flips all the bits in the integer.
+
+int a = 5; // binary representation: 00000000000000000000000000000101
+int b = ~a; // b = -6, binary representation: 11111111111111111111111111111010
+
+
+
+_____________________
+Left Shift (<<) - Shifts all the bits in an integer to the left by a specified number of positions,
+effectively multiplying the integer by 2 raised to the power of the shift amount.
+
+int a = 5; // binary representation: 00000000000000000000000000000101
+int b = a << 1; // b = 10, binary representation: 00000000000000000000000000001010
+
+
+
+________________________
+Right Shift (>>) - Shifts all the bits in an integer to the right by a specified number of positions,
+effectively dividing the integer by 2 raised to the power of the shift amount.
+
+int a = 5; // binary representation: 00000000000000000000000000000101
+int b = a >> 1; // b = 2, binary representation: 00000000000000000000000000000010
+
+
+
+___________________________
+Unsigned Right Shift (>>>) - Similar to the right shift operator, but fills the leftmost bits with zeros
+instead of preserving the sign of the integer.
+
+int a = -5; // binary representation: 1111111111111111111111111111011
+int b = a >>> 1; // b = 2147483642, binary representation: 0111111111111111111111111111011
