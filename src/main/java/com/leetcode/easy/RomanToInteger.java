@@ -2,8 +2,17 @@ package com.leetcode.easy;
 
 import java.util.HashMap;
 
+/**
+ * 13. Given a roman numeral, convert it to an integer.
+ */
 public class RomanToInteger {
 
+    /**
+     * The idea - roman literals are written from bigger numbers to less: XVIII
+     * But there's a few exceptions, when they are switched - that means that you should subtract left from right (no matter what they are): XIX, IV
+     * Take the far right as a result start, then make a cycle for the rest.
+     * Compare it with the last right and so on
+     */
     public static void main(String[] args) {
         System.out.println(1994 == romanToInt("MCMXCIV"));
         System.out.println(58 == romanToInt("LVIII"));
