@@ -49,7 +49,7 @@ public class Tree {
     }
 
     //-----------------------------------------------------------------------
-    // симметричный обход дерева - инфиксная запись А*(B+C)
+    // симметричный обход дерева - инфиксная запись (inorder traversal) А*(B+C)
     private void inOrder(Node localRoot) {
         if (localRoot != null) {
             inOrder(localRoot.leftChild);
@@ -58,7 +58,7 @@ public class Tree {
         }
     }
 
-    // прямой обход дерева - префиксная запись (*А+BC)
+    // прямой обход дерева - префиксная запись (preorder traversal) (*А+BC)
     private void preOrder(Node localRoot) {
         if (localRoot != null) {
             System.out.print(localRoot.iData + " "); // "посещение"
@@ -67,7 +67,7 @@ public class Tree {
         }
     }
 
-    // обратный обход дерева - постфиксная запись (АBC+*)
+    // обратный обход дерева - постфиксная запись (postorder traversal) (АBC+*)
     private void postOrder(Node localRoot) {
         if (localRoot != null) {
             postOrder(localRoot.leftChild);
