@@ -1,5 +1,7 @@
 package com.leetcode.easy.bfsdfs;
 
+import com.util.TreeNode;
+
 /**
  * #101. Symmetric Tree
  * <p>
@@ -71,21 +73,5 @@ public class SymmetricTree {
         return left.val == right.val &&
                 isMirror(left.left, right.right) &&
                 isMirror(left.right, right.left);
-    }
-
-    public static class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int val) {
-            this.val = val;
-        }
-
-        TreeNode(int val, TreeNode left, TreeNode right) {
-            this.val = val;
-            this.left = left;
-            this.right = right;
-        }
     }
 }

@@ -1,5 +1,7 @@
 package com.leetcode.easy.bfsdfs;
 
+import com.util.TreeNode;
+
 /**
  * #617
  * <p>
@@ -60,25 +62,5 @@ public class MergeTwoBinaryTrees {
         t1.right = mergeTrees(t1.right, t2.right);
 
         return t1;
-    }
-
-    static class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-
-        public TreeNode setLeft(TreeNode node) {
-            left = node;
-            return this;
-        }
-
-        public TreeNode setRight(TreeNode node) {
-            right = node;
-            return this;
-        }
     }
 }
