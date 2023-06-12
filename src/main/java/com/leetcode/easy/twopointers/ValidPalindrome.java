@@ -1,4 +1,4 @@
-package com.leetcode.easy;
+package com.leetcode.easy.twopointers;
 
 /**
  * #125. Valid Palindrome
