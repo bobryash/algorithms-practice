@@ -13,14 +13,15 @@ import com.util.ListNode;
  * Return true if there is a cycle in the linked list. Otherwise, return false.
  * <p>
  * <p>
- * <p>
  * Example 1:
  * Input: head = [3,2,0,-4], pos = 1
+ * 3 -> 2 -> 0 -> -4 -> ... -> 2
  * Output: true
  * Explanation: There is a cycle in the linked list, where the tail connects to the 1st node (0-indexed).
  * <p>
  * Example 2:
  * Input: head = [1,2], pos = 0
+ * 1 -> 2 -> ... -> 1
  * Output: true
  * Explanation: There is a cycle in the linked list, where the tail connects to the 0th node.
  * <p>
