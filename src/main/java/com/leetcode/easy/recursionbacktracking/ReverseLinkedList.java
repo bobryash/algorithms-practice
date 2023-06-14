@@ -1,7 +1,6 @@
 package com.leetcode.easy.recursionbacktracking;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.util.ListNode;
 
 /**
  * #206
@@ -21,24 +20,25 @@ public class ReverseLinkedList {
                                         .next(new ListNode(5)))));
 
         System.out.println(list); // [1, 2, 3, 4, 5]
-        ListNode result = reverseList1(list);
+        ListNode result = reverseIterative(list);
         System.out.println(result); // [5, 4, 3, 2, 1]
     }
 
     /* iterative solution */
-    public static ListNode reverseList1(ListNode head) {
-        ListNode newHead = null;
+    public static ListNode reverseIterative(ListNode head) {
+        // null 1 -> 2 -> 3
+        ListNode prev = null;
         while (head != null) {
-            ListNode next = head.next;
-            head.next = newHead;
-            newHead = head;
+            ListNode next = head.next; // save next (2 from example above), because we lose it otherwise
+            head.next = prev;
+            prev = head;
             head = next;
         }
-        return newHead;
+        return prev;
     }
 
     /* recursive solution */
-    public static ListNode reverseList2(ListNode head) {
+    public static ListNode reverseRecursive(ListNode head) {
         return reverseListInt(head, null);
     }
 
@@ -50,30 +50,6 @@ public class ReverseLinkedList {
         ListNode next = head.next;
         head.next = newHead;
         return reverseListInt(next, head);
-    }
 
-    public static class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int val) {
-            this.val = val;
-        }
-
-        ListNode next(ListNode node) {
-            this.next = node;
-            return this;
-        }
-
-        @Override
-        public String toString() {
-            ListNode listNode = this;
-            List<Integer> result = new ArrayList<>();
-            while (listNode != null) {
-                result.add(listNode.val);
-                listNode = listNode.next;
-            }
-            return result.toString();
-        }
     }
 }

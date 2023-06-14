@@ -13,9 +13,9 @@ public class ListNode {
         this.next = next;
     }
 
-    public ListNode setNext(ListNode next) {
-        this.next = next;
-        return this.next;
+    public ListNode next(ListNode node) {
+        this.next = node;
+        return this;
     }
 
     public static ListNode getListOfSize(int size) {
@@ -28,19 +28,21 @@ public class ListNode {
         return head;
     }
 
+    private void setNext(ListNode next) {
+        this.next = next;
+    }
+
     @Override
     public String toString() {
-        if (this.next == null) {
-            return Integer.toString(val);
+        StringBuilder sb = new StringBuilder();
+        ListNode curr = this;
+        while (curr != null) {
+            sb.append(curr.val);
+            if (curr.next != null) {
+                sb.append(" -> ");
+            }
+            curr = curr.next;
         }
-
-        StringBuilder builder = new StringBuilder();
-        ListNode temp = this;
-        while (temp != null) {
-            builder.append(temp.val).append(", ");
-            temp = temp.next;
-        }
-        String result = builder.toString();
-        return result.substring(0, result.lastIndexOf(", "));
+        return sb.toString();
     }
 }
