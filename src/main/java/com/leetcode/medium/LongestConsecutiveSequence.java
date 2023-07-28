@@ -40,7 +40,7 @@ public class LongestConsecutiveSequence {
         for (int n : nums) {
             if (!set.contains(n - 1)) { // n is a start of a sequence
                 int seqLength = 0;
-                while (set.contains(n + seqLength)) { // hiw long is a sequence?
+                while (set.contains(n + seqLength)) { // how long is a sequence?
                     seqLength += 1;
                 }
                 longest = Math.max(seqLength, longest);
