@@ -1,6 +1,10 @@
 package com.leetcode.medium.twopointers;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import static com.util.Printer.getFlatList;
 
 /**
  * #15. 3Sum
@@ -11,7 +15,6 @@ import java.util.List;
  * Notice that the solution set must not contain duplicate triplets.
  * <p>
  * Example 1:
- * <p>
  * Input: nums = [-1,0,1,2,-1,-4]
  * Output: [[-1,-1,2],[-1,0,1]]
  * Explanation:
@@ -20,13 +23,13 @@ import java.util.List;
  * nums[0] + nums[3] + nums[4] = (-1) + 2 + (-1) = 0.
  * The distinct triplets are [-1,0,1] and [-1,-1,2].
  * Notice that the order of the output and the order of the triplets does not matter.
- * Example 2:
  * <p>
+ * Example 2:
  * Input: nums = [0,1,1]
  * Output: []
  * Explanation: The only possible triplet does not sum up to 0.
- * Example 3:
  * <p>
+ * Example 3:
  * Input: nums = [0,0,0]
  * Output: [[0,0,0]]
  * Explanation: The only possible triplet sums up to 0.
@@ -34,10 +37,47 @@ import java.util.List;
 public class ThreeSum {
 
     public static void main(String[] args) {
-
+        System.out.println(getFlatList(threeSum(new int[]{-1, 0, 1, 2, -1, -4})));
+        System.out.println(getFlatList(threeSum(new int[]{0, 1, 1})));
+        System.out.println(getFlatList(threeSum(new int[]{0, 0, 0})));
     }
 
-    public List<List<Integer>> threeSum(int[] nums) {
-        return null;
+    // (looks scary but not so scary)
+    // the idea - sort array, then go one by one element and apply 2sum solution for the rest elements relative to element.
+    // like [2, 3, 8, 9] --> 2 - [3, 8, 9] then 3 - [8, 9]
+    // biggest catch are duplicates, check below
+    public static List<List<Integer>> threeSum(int[] nums) {
+        Arrays.sort(nums); // allows to apply two-pointer approach - we can say if elements sum is > or < than target sum
+
+        List<List<Integer>> result = new ArrayList<>();
+
+        for (int i = 0; i < nums.length - 2; i++) { // -2 because we need to be sure that there's enough space for a triplet
+            if (i == 0 || nums[i] != nums[i - 1]) { // to skip duplicates while choosing i: [2,2,3,8,9] --> 2(i) - [3,8,9]
+                int left = i + 1; // 2(i) - [3(left), 8, 9]
+                int right = nums.length - 1; // 2(i) - [3(left), 8, 9(right)]
+
+                // it's basically a 2sum solution from here, check 167 for details
+                while (left < right) {
+                    int threeSum = nums[i] + nums[left] + nums[right];
+                    if (threeSum == 0) { // our goal - triplet which gives 0 in sum
+                        result.add(List.of(nums[i], nums[left], nums[right]));
+
+                        // here goes the trickiest part (different arrays in imagine examples!)
+                        while (left < right && nums[left] == nums[left + 1])
+                            left++; // imagine [1,2,2,2,3,4] --> 1 - [2,2,2,3,4] -> 1 - [2,3,4]
+                        while (left < right && nums[right] == nums[right - 1])
+                            right--; // imagine [1,2,3,4,4,4] --> 1 - [2,3,4,4,4] -> 1 - [2,3,4]
+                        left++; // since 2 was already used - move to next: 1 - [3,4]
+                        right--; // since 4 was already used - move to next: 1 - [2,3]
+                    } else if (threeSum > 0) {
+                        right--;
+                    } else {
+                        left++;
+                    }
+                }
+            }
+        }
+
+        return result;
     }
 }
