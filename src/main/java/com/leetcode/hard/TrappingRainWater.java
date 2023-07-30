@@ -31,10 +31,10 @@ public class TrappingRainWater {
         int result = 0;
 
         while (left < right) {
-            if (leftMax > rightMax) { // always move pointer which is smaller
+            if (leftMax > rightMax) { // always move pointer which is smaller (we always need smaller, smaller holds the water!)
                 right--; // move it first, because at the beginning you can't hold water - one boundary is missing (here - left one)
                 // why we need only rightMax? - because we are looking at the right pointer value - closest to rightMax. and we know that rightMax is less than leftMax (row 34)
-                // so it's our bottleneck, we should look at the minimum, because it will hold water
+                // so it's our bottleneck, we should look at the minimum, because it will hold water. again, when calculating (max(left or right?) - height[right]) we always look for the MINIMUM value, so water doesn't spill!
                 rightMax = Math.max(rightMax, height[right]); // no need to check for negative value below, because worst case would be zero - rightMax(=height[right]) - height[right] = 0
                 result += rightMax - height[right];
             } else {
