@@ -48,7 +48,7 @@ public class Search2DMatrix {
         int colN = matrix[0].length - 1;
 
         // find the row
-        while (topRow <= bottomRow) { // check with smth simple
+        while (topRow <= bottomRow) {
             int midRow = topRow + (bottomRow - topRow) / 2;
             if (target < matrix[midRow][0]) { // if target is less than first value of the row, e.g. [5, 8, 10, 11] - target 4
                 bottomRow = midRow - 1; // then need to search in higher rows with lesser values
@@ -64,7 +64,7 @@ public class Search2DMatrix {
         int theRow = topRow + (bottomRow - topRow) / 2; // we know that it will give us THE row now
         // standard binary search
         int l = 0, r = colN;
-        while (l <= r) {
+        while (l <= r) { // <= in bin search is for keep searching while there's space = when target is in the one of the extremes: target 4-[1,2,3,4], mid = 3 + (3-3)/2 = i3 v4
             int midIndex = l + (r - l) / 2;
             int midValue = matrix[theRow][midIndex];
             if (target == midValue) {
