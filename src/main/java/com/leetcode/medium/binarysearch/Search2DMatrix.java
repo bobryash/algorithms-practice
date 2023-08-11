@@ -38,46 +38,43 @@ public class Search2DMatrix {
                 {23, 30, 34, 60}
         };
 
-        System.out.println(new Search2DMatrix().searchMatrix(matrix, 3)); // true
-        System.out.println(new Search2DMatrix().searchMatrix(matrix, 13));// false
+        System.out.println(searchMatrix(matrix, 3)); // true
+        System.out.println(searchMatrix(matrix, 13));// false
     }
 
-    public boolean searchMatrix(int[][] matrix, int target) {
-        int rows = matrix.length;
-        int cols = matrix[0].length;
+    public static boolean searchMatrix(int[][] matrix, int target) {
+        int topRow = 0;
+        int bottomRow = matrix.length - 1;
+        int colN = matrix[0].length - 1;
 
-        int top = 0;
-        int bottom = rows - 1;
-
-        // find a row which contains value first
-        while (top <= bottom) {
-            int row = top + (bottom - top) / 2;
-            if (target > matrix[row][cols - 1]) {
-                top = row + 1;
-            } else if (target < matrix[row][0]) {
-                bottom = row - 1;
+        // find the row
+        while (topRow <= bottomRow) { // check with smth simple
+            int midRow = topRow + (bottomRow - topRow) / 2;
+            if (target < matrix[midRow][0]) { // if target is less than first value of the row, e.g. [5, 8, 10, 11] - target 4
+                bottomRow = midRow - 1; // then need to search in higher rows with lesser values
+            } else if (target > matrix[midRow][colN]) { // if target is bigger than last value of the row, e.g. [5, 8, 10, 11] - target 12
+                topRow = midRow + 1; // then need to search in lower rows with bigger values
             } else {
-                break;
+                break; // if it's somewhere in the middle of the row, then we found it
             }
         }
 
-        if (top > bottom) {
-            return false;
-        }
+        if (topRow > bottomRow) return false; // there's might be no match at all
 
-        // then find a value inside this row
-        int row = top + (bottom - top) / 2;
-        int l = 0;
-        int r = cols - 1;
-
+        int theRow = topRow + (bottomRow - topRow) / 2; // we know that it will give us THE row now
+        // standard binary search
+        int l = 0, r = colN;
         while (l <= r) {
-            int m = (l + r) / 2;
-            if (target > matrix[row][m]) {
-                l = m + 1;
-            } else if (target < matrix[row][m]) {
-                r = m - 1;
-            } else {
+            int midIndex = l + (r - l) / 2;
+            int midValue = matrix[theRow][midIndex];
+            if (target == midValue) {
                 return true;
+            }
+
+            if (target > midValue) {
+                l = midIndex + 1;
+            } else {
+                r = midIndex - 1;
             }
         }
 
