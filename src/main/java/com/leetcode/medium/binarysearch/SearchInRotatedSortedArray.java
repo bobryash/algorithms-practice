@@ -16,15 +16,14 @@ package com.leetcode.medium.binarysearch;
  * <p>
  * <p>
  * Example 1:
- * <p>
  * Input: nums = [4,5,6,7,0,1,2], target = 0
  * Output: 4
- * Example 2:
  * <p>
+ * Example 2:
  * Input: nums = [4,5,6,7,0,1,2], target = 3
  * Output: -1
- * Example 3:
  * <p>
+ * Example 3:
  * Input: nums = [1], target = 0
  * Output: -1
  * <p>
@@ -40,34 +39,54 @@ package com.leetcode.medium.binarysearch;
 public class SearchInRotatedSortedArray {
 
     public static void main(String[] args) {
-        System.out.println(new SearchInRotatedSortedArray()
-                .search(new int[]{3, 1}, 1));
+        System.out.println(search(new int[]{4, 5, 6, 7, 0, 1, 2}, 0)); // 4
+        System.out.println(search(new int[]{4, 5, 6, 7, 0, 1, 2}, 3)); // - 1
+        System.out.println(search(new int[]{1}, 0)); // -1
+        System.out.println(search(new int[]{3, 1}, 1)); // 1
     }
 
-    // We keep dividing the array into two parts by checking the middle element and moving the low and high
-    // pointers accordingly, until we find the target or reach the end of the array.
-    public int search(int[] nums, int target) {
-        int start = 0;
-        int end = nums.length - 1;
+    // rotated array is an array, which parts were swapped:
+    // x|     /     | /
+    //  |    /      |/
+    //  |   /       |     /
+    //  |  /        |    /
+    //  | /         |   /
+    //  _________   ___________y
+    //   1 2 3 4 5  4 5 1 2 3
+    // we can find out in which half our mid is.
+    //
+    // the idea - find out in which half your mid is, then decide if you should move to other half or not.
+    // decision is based on comparison with mid-value and closest far extreme (left or right)
+    //
+    static int search(int[] nums, int target) {
+        int left = 0, right = nums.length - 1;
 
-        while (start <= end) {
-            int mid = start + (end - start) / 2;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
 
-            if (nums[mid] == target) {
+            if (target == nums[mid]) {
                 return mid;
             }
 
-            if (nums[start] <= nums[mid]) { // [4, 5, 6, 7, 0, 1, 2] 4 < 7 // we're in a left sorted part
-                if (target >= nums[start] && target < nums[mid]) {
-                    end = mid - 1; // [4, 5, 6] - 5
+            if (nums[mid] >= nums[left]) { // we in the left part (check graph 2 above)
+                // when do we move from left part to right?
+                // 1. when target is greater than mid: [2, 4, 5, 6, 7, 0, 1] target 7 > mid 6
+                // OR
+                // 2. when target is less than far left value: [2, 4, 5, 6, 7, 0, 1] target 1 < left 2
+                if (target > nums[mid] || target < nums[left]) {
+                    left = mid + 1;
                 } else {
-                    start = mid + 1; // [0, 1, 2] - 1
+                    right = mid - 1;
                 }
-            } else { // [7, 0, 1, 2, 4, 5, 6] 7 > 2 // we're in a right sorted part
-                if (target > nums[mid] && target <= nums[end]) { // if target in a right part, then forget left part
-                    start = mid + 1; // [4, 5, 6] - 5
-                } else { // go to the left, if not
-                    end = mid - 1; // [7, 0, 1] - 0
+            } else { // we in the right part (check graph 2 above)
+                // when do we move form right part to left?
+                // 1. when target is less than mid: [6, 7, 0, 1, 2, 4, 5] target 5 > mid 7
+                // OR
+                // 2. when target is greater than far right value: [6, 7, 0, 1, 2, 4, 5] target 6 > right 5
+                if (target < nums[mid] || target > nums[right]) {
+                    right = mid - 1;
+                } else {
+                    left = mid + 1;
                 }
             }
         }
