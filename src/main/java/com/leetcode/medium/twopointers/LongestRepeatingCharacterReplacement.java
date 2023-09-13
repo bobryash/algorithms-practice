@@ -30,7 +30,11 @@ public class LongestRepeatingCharacterReplacement {
         System.out.println(characterReplacement("AABABBA", 1)); // 4
     }
 
-    // the idea - sliding window
+    // the idea - sliding window.
+    // to determine if current substring is ok (we can take its length as a potential answer) we need to know:
+    // - what is a current max frequent character (AABA -> A - 3)
+    // - if a number of allowed-to-replace left letters is less than or equal k (AABA -> 4(substring length) - 3(A-3) = 1(B) <= 1(k)
+    // if above conditions are not true, then we shrink window's left border
     public static int characterReplacement(String s, int k) {
         int left = 0, right = 0; // borders of a sliding window
         int maxFreq = 0; // current maximum of repeating character
