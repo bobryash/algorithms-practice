@@ -1,25 +1,25 @@
 package com.leetcode.medium.slidingwindow;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * #3
  * Given a string s, find the length of the longest substring without repeating characters.
- *
+ * <p>
  * Example 1:
- *
  * Input: s = "abcabcbb"
  * Output: 3
  * Explanation: The answer is "abc", with the length of 3.
- *
+ * <p>
  * Example 2:
- *
  * Input: s = "bbbbb"
  * Output: 1
  * Explanation: The answer is "b", with the length of 1.
- *
+ * <p>
  * Example 3:
- *
  * Input: s = "pwwkew"
  * Output: 3
  * Explanation: The answer is "wke", with the length of 3.
@@ -28,7 +28,9 @@ import java.util.*;
 public class LongestSubstringWORepeatingChars {
 
     public static void main(String[] args) {
-        System.out.println(lengthOfLongestSubstring("abcabcbb"));
+        System.out.println(lengthOfLongestSubstring3("abcabcbb")); // 3
+        System.out.println(lengthOfLongestSubstring3("bbbbb")); // 1
+        System.out.println(lengthOfLongestSubstring3("pwwkew")); // 3
     }
 
     /**
@@ -61,7 +63,7 @@ public class LongestSubstringWORepeatingChars {
         for (int start = 0, end = 0; end < input.length(); end++) {
             char currChar = input.charAt(end);
             if (visited.containsKey(currChar)) {
-                start = Math.max(visited.get(currChar)+1, start);
+                start = Math.max(visited.get(currChar) + 1, start);
             }
             if (output.length() < end - start + 1) {
                 output = input.substring(start, end + 1);
@@ -74,7 +76,7 @@ public class LongestSubstringWORepeatingChars {
     // Time Complexity: O(n); Space Complexity: O(n)
     public int lengthOfLongestSubstring2(String s) {
 
-        /**
+        /*
          * Recording all visited chars
          * @param Character - the char visited
          * @param Integer - last index of the visited char
@@ -119,5 +121,26 @@ public class LongestSubstringWORepeatingChars {
         }
 
         return maxNonDuplicateSubstringLength;
+    }
+
+    // sliding window approach recap.
+    // if char is not in set, then check for maxLength and expand a window to the right.
+    // if char IS in set, then shrink the window from the left by moving left pointer and removing current left value from the set
+    public static int lengthOfLongestSubstring3(String s) {
+        int left = 0, right = 0, maxLength = 0;
+        Set<Character> set = new HashSet<>();
+
+        while (right < s.length()) {
+            if (!set.contains(s.charAt(right))) {
+                set.add(s.charAt(right));
+                maxLength = Math.max(maxLength, right - left + 1); // +1 is to deal with edge case like 0 - 0 + 1 (zero based!)
+                right++;
+            } else {
+                set.remove(s.charAt(left));
+                left++;
+            }
+        }
+
+        return maxLength;
     }
 }

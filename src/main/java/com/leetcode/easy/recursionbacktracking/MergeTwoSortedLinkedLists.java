@@ -58,8 +58,8 @@ public class MergeTwoSortedLinkedLists {
      * if use only prehead, then by prehead = prehead.next you just losing links
      */
     public static ListNode mergeTwoLists2(ListNode l1, ListNode l2) {
-        ListNode prehead = new ListNode(-1); // -1 is just random number
-        ListNode cur = prehead;
+        ListNode prehead = new ListNode(-1); // for a static head pointer (-1 is just random number)
+        ListNode cur = prehead; // for a moving pointer
 
         while (l1 != null && l2 != null) {
             if (l1.val <= l2.val) {
