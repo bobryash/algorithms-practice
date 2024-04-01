@@ -34,6 +34,9 @@ public class RemoveNthNodeFromEndOfList {
         for (int i = 0; i < n; i++) {
             fast = fast.next;
         }
+        // edge case when n == list.size()
+        // that means that n kind of overflows the list and points to the head.
+        // in that case, head.next would remove the n-node - the head
         if (fast == null) {
             return head.next;
         }

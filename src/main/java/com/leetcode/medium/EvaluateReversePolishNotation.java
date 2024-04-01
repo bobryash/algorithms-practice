@@ -57,7 +57,7 @@ public class EvaluateReversePolishNotation {
             if ("+".equals(token)) {
                 stack.push(stack.pop() + stack.pop());
             } else if ("-".equals(token)) {
-                // stack: [2, 3, -]. need to do: 2 - 3
+                // stack: [2, 3, -]. need to do: 2 - 3 (from left to right!)
                 int x = stack.pop();
                 int y = stack.pop();
                 stack.push(y - x);
@@ -66,7 +66,7 @@ public class EvaluateReversePolishNotation {
             } else if ("/".equals(token)) {
                 int x = stack.pop();
                 int y = stack.pop();
-                stack.push(y / x);
+                stack.push(y / x); // (from left to right!)
             } else {
                 stack.push(Integer.parseInt(token));
             }

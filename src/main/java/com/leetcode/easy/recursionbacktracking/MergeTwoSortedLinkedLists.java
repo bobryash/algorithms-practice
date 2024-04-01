@@ -52,7 +52,8 @@ public class MergeTwoSortedLinkedLists {
      *
      * initially prehead and cur point to the same dummy object
      * prehead is keeping all chain.
-     * cur says: now next object of the current one is THIS, and after it I become THIS (assign `next` and become next = easy chain traverse)
+     * cur says: now next object of the current one is THIS, and after it I become THIS
+     * (assign `next` and become next = easy chain traverse)
      * without cur you should traverse prehead to the end each time.
      *
      * if use only prehead, then by prehead = prehead.next you just losing links

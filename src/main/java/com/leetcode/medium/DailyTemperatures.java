@@ -6,7 +6,10 @@ import java.util.Stack;
 /**
  * #739. Daily Temperatures
  * <p>
- * Given an array of integers temperatures represents the daily temperatures, return an array answer such that answer[i] is the number of days you have to wait after the ith day to get a warmer temperature. If there is no future day for which this is possible, keep answer[i] == 0 instead.
+ * Given an array of integers temperatures represents the daily temperatures,
+ * return an array answer such that answer[i] is the number of days you have to wait
+ * after the ith day to get a warmer temperature.
+ * If there is no future day for which this is possible, keep answer[i] == 0 instead.
  * <p>
  * Example 1:
  * Input: temperatures = [73,74,75,71,69,72,76,73]
@@ -28,9 +31,10 @@ public class DailyTemperatures {
         System.out.println(Arrays.toString(dailyTemperatures(new int[]{30, 60, 90}))); // [1,1,0]
     }
 
-    // the idea - add temps in a stack, until we find temp which is bigger than previous one (on top of stack)
-    // this big temp might be bigger than several in a row, so we go in while loop, find difference (indexes == day's numbers) and populate the result with diffs
-    // and then push current temp in stack
+    // the idea - add temps in a stack, until we find temp which is bigger than previous one (on top of stack).
+    // this big temp might be bigger than several in a row, so we go in while loop,
+    // find difference (indexes == day's numbers) and populate the result with diffs.
+    // and then push current temp onto stack
     public static int[] dailyTemperatures(int[] temperatures) {
         Stack<Integer> stack = new Stack<>();
         int[] result = new int[temperatures.length];

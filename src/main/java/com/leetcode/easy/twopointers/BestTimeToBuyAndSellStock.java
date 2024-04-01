@@ -38,8 +38,11 @@ public class BestTimeToBuyAndSellStock {
             if (prices[left] < prices[right]) {
                 int profit = prices[right] - prices[left];
                 maxProfit = Math.max(maxProfit, profit);
+                // no left pointer shift because it might be the lowest price to buy (?)
             } else {
-                left = right; // Update the buying pointer to the current index
+                // if right is less than left, why would I pay 7, if I can wait one day and pay 1?
+                // hence shift left pointer
+                left = right;
             }
             right++; // Move the selling pointer to the next index
         }

@@ -18,12 +18,12 @@ import java.util.List;
  */
 public class GenerateParentheses {
 
-    static List<String> result = new ArrayList<>();
-
     public static void main(String[] args) {
         System.out.println(String.join(", ", generateParenthesis(3))); // ((())), (()()), (())(), ()(()), ()()()
         // System.out.println(String.join(", ", generateParenthesis(1))); // ()
     }
+
+    static List<String> result = new ArrayList<>();
 
     public static List<String> generateParenthesis(int n) {
         backtrack(0, 0, n, "");
@@ -31,17 +31,17 @@ public class GenerateParentheses {
     }
 
     // backtracking power
-    static void backtrack(int openN, int closedN, int n, String s) {
-        if (openN == closedN && openN == n) { // base case
+    static void backtrack(int opened, int closed, int n, String s) {
+        if (opened == closed && opened == n) { // base case
             result.add(s);
         }
 
-        if (openN < n) { // can only add ( when some capacity is left
-            backtrack(openN + 1, closedN, n, s + "(");
+        if (opened < n) { // can only add ( when some capacity is left
+            backtrack(opened + 1, closed, n, s + "(");
         }
 
-        if (closedN < openN) { // make sense to add closed only when there are some opened
-            backtrack(openN, closedN + 1, n, s + ")");
+        if (closed < opened) { // make sense to add closed only when there are some opened
+            backtrack(opened, closed + 1, n, s + ")");
         }
     }
 }

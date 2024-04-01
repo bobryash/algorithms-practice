@@ -51,12 +51,19 @@ public class FindMinimumInRotatedSortedArray {
     //  _________   ___________y
     //   1 2 3 4 5  4 5 1 2 3
 
+    // left portion of rotated array always going to have bigger values than a left portion
+
     // the idea - shift l and r until we either land in the sorted range and then return l : [5,6,1,2,3] -> [1,2,3] -> 1
     // or until our range is narrowed to one value: [5,6,1,2,3] -> [1] -> 1.
 
+    // idea reimagined: first need to determine on which part current mid is:
+    // on a left, with bigger numbers; or on a right, with lesser numbers, then move accordingly.
+    // if mid value is bigger than left one, then it's always left side, and you should move to right.
+
     // how do we shift pointers? - first we determine in which half of rotated array current mid is [5,6] or [1,2,3]
     // if mid is in left(with bigger nums), then move left to mid + 1; [5,6,1,2,3] mid6 -> [1,2,3]
-    // if mid in right half(with less nums), then move to left, but keep mid (cause it was on a left initially and might be the minimum): [5,6,1,2,3] -> [5,6,1]
+    // if mid in right half(with less nums), then move to left, but keep mid
+    // (cause it was on a left initially and might be the minimum): [5,6,1,2,3] -> [5,6,1]
     public static int findMin(int[] nums) {
         int left = 0, right = nums.length - 1;
 
@@ -76,4 +83,5 @@ public class FindMinimumInRotatedSortedArray {
 
         return 0;
     }
+
 }

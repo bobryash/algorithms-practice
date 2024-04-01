@@ -3,7 +3,7 @@ package com.leetcode.medium.binarysearch;
 /**
  * #74
  * <p>
- * You are given an m x n integer matrix matrix with the following two properties:
+ * You are given an m x n integer matrix "matrix" with the following two properties:
  * <p>
  * Each row is sorted in non-decreasing order.
  * The first integer of each row is greater than the last integer of the previous row.
@@ -55,26 +55,30 @@ public class Search2DMatrix {
             } else if (target > matrix[midRow][colN]) { // if target is bigger than last value of the row, e.g. [5, 8, 10, 11] - target 12
                 topRow = midRow + 1; // then need to search in lower rows with bigger values
             } else {
-                break; // if it's somewhere in the middle of the row, then we found it
+                break; // if it's somewhere in the current row, then we found it
             }
         }
 
-        if (topRow > bottomRow) return false; // there's might be no match at all
+        // all rows are checked - no match
+        if (topRow > bottomRow) return false;
 
-        int theRow = topRow + (bottomRow - topRow) / 2; // we know that it will give us THE row now
+        // we know that it will give us THE row now (same as last midRow)
+        int theRow = topRow + (bottomRow - topRow) / 2;
         // standard binary search
-        int l = 0, r = colN;
-        while (l <= r) { // <= in bin search is for keep searching while there's space = when target is in the one of the extremes: target 4-[1,2,3,4], mid = 3 + (3-3)/2 = i3 v4
-            int midIndex = l + (r - l) / 2;
+        int left = 0, right = colN;
+        // <= in bin search is for keep searching while there's space = when target is in the
+        // one of the extremes: target 4-[1,2,3,4], mid = 3 + (3-3)/2 = i3 v4
+        while (left <= right) {
+            int midIndex = left + (right - left) / 2;
             int midValue = matrix[theRow][midIndex];
             if (target == midValue) {
                 return true;
             }
 
             if (target > midValue) {
-                l = midIndex + 1;
+                left = midIndex + 1;
             } else {
-                r = midIndex - 1;
+                right = midIndex - 1;
             }
         }
 

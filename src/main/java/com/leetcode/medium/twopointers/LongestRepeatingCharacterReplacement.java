@@ -46,11 +46,10 @@ public class LongestRepeatingCharacterReplacement {
             freqs[curChar - 'A']++;
             maxFreq = Math.max(maxFreq, freqs[curChar - 'A']);
 
-            // If the number of replacements needed is greater than k (number of replacements allowed),
-            // move the left pointer to shrink the window
+            // If the number of replacements needed is greater than k (number of replacements allowed)...
             if (right - left + 1 - maxFreq > k) { // "A[BBABA]BA", l=1,r=5,k=1 -> BBABA 5-1+1-3(BBB) = 2, 2 > 1
                 freqs[s.charAt(left) - 'A']--;
-                left++;
+                left++; //...move the left pointer to shrink the window
             } else {
                 // Update the maximum length of the valid substring
                 answer = Math.max(answer, right - left + 1);

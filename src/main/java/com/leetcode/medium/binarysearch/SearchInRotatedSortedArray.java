@@ -39,10 +39,10 @@ package com.leetcode.medium.binarysearch;
 public class SearchInRotatedSortedArray {
 
     public static void main(String[] args) {
-        System.out.println(search(new int[]{4, 5, 6, 7, 0, 1, 2}, 0)); // 4
-        System.out.println(search(new int[]{4, 5, 6, 7, 0, 1, 2}, 3)); // - 1
-        System.out.println(search(new int[]{1}, 0)); // -1
-        System.out.println(search(new int[]{3, 1}, 1)); // 1
+        System.out.println(search2(new int[]{4, 5, 6, 7, 0, 1, 2}, 0)); // 4
+        System.out.println(search2(new int[]{4, 5, 6, 7, 0, 1, 2}, 3)); // - 1
+        System.out.println(search2(new int[]{1}, 0)); // -1
+        System.out.println(search2(new int[]{3, 1}, 1)); // 1
     }
 
     // rotated array is an array, which parts were swapped:
@@ -56,7 +56,7 @@ public class SearchInRotatedSortedArray {
     // we can find out in which half our mid is.
     //
     // the idea - find out in which half your mid is, then decide if you should move to other half or not.
-    // decision is based on comparison with mid-value and closest far extreme (left or right)
+    // decision is based on comparison to mid-value and closest far extreme (left or right)
     //
     static int search(int[] nums, int target) {
         int left = 0, right = nums.length - 1;
@@ -87,6 +87,35 @@ public class SearchInRotatedSortedArray {
                     right = mid - 1;
                 } else {
                     left = mid + 1;
+                }
+            }
+        }
+
+        return -1;
+    }
+
+    // little recap.
+    // first need to determine which side is sorted, relative to pivot.
+    // then try to check if target is in sorted, then decide to which part go next, based on that
+    static int search2(int[] nums, int target) {
+        int left = 0;
+        int right = nums.length - 1;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] == target) return mid;
+
+            if (nums[left] <= nums[mid]) { // left part is sorted (it's not a guarantee that target is there though)
+                if (nums[left] <= target && target < nums[mid]) { // target on a left part
+                    right = mid - 1; // go left
+                } else { // target on a right side
+                    left = mid + 1; // go right
+                }
+            } else { // right part is sorted
+                if (nums[mid] < target && target <= nums[right]) { // target on a right side
+                    left = mid + 1; // go right
+                } else { // target on a left side
+                    right = mid - 1; // go left
                 }
             }
         }

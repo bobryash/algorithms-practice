@@ -37,24 +37,24 @@ import static com.util.Printer.getFlatList;
 public class ThreeSum {
 
     public static void main(String[] args) {
-        System.out.println(getFlatList(threeSum(new int[]{-1, 0, 1, 2, -1, -4})));
-        System.out.println(getFlatList(threeSum(new int[]{0, 1, 1})));
-        System.out.println(getFlatList(threeSum(new int[]{0, 0, 0})));
+        System.out.println(getFlatList(threeSum(new int[]{-1, 0, 1, 2, -1, -4}))); // ([-1, -1, 2], [-1, 0, 1])
+        System.out.println(getFlatList(threeSum(new int[]{0, 1, 1}))); // ()
+        System.out.println(getFlatList(threeSum(new int[]{0, 0, 0}))); // ([0, 0, 0])
     }
 
     // (looks scary but not so scary)
     // the idea - sort array, then go one by one element and apply 2sum solution for the rest elements relative to element.
-    // like [2, 3, 8, 9] --> 2 - [3, 8, 9] then 3 - [8, 9]
-    // biggest catch are duplicates, check below
+    // given [2, 3, 8, 9]: [2(i), 3(l), 8, 9(r)] -> [2, 3(i), 8(l), 9(r)] -> etc..
+    // it's important to skip duplicates, due to task requirements (unique values)
     public static List<List<Integer>> threeSum(int[] nums) {
         Arrays.sort(nums); // allows to apply two-pointer approach - we can say if elements sum is > or < than target sum
 
         List<List<Integer>> result = new ArrayList<>();
 
         for (int i = 0; i < nums.length - 2; i++) { // -2 because we need to be sure that there's enough space for a triplet
-            if (i == 0 || nums[i] != nums[i - 1]) { // to skip duplicates while choosing i: [2,2,3,8,9] --> 2(i) - [3,8,9]
-                int left = i + 1; // 2(i) - [3(left), 8, 9]
-                int right = nums.length - 1; // 2(i) - [3(left), 8, 9(right)]
+            if (i == 0 || nums[i] != nums[i - 1]) { // to skip duplicates for i: [2(i),2,3,8,9] --> [2,2,3(i),8,9] (==0 is ok because it's a start)
+                int left = i + 1; // [2(i), 3(left), 8, 9]
+                int right = nums.length - 1; // [2(i), 3(left), 8, 9(right)]
 
                 // it's basically a 2sum solution from here, check 167 for details
                 while (left < right) {
@@ -62,13 +62,13 @@ public class ThreeSum {
                     if (threeSum == 0) { // our goal - triplet which gives 0 in sum
                         result.add(List.of(nums[i], nums[left], nums[right]));
 
-                        // here goes the trickiest part (different arrays in imagine examples!)
+                        // to skip duplicates inside left and right [2(i), 3(left), 5, 5, 6, 7(right)]
                         while (left < right && nums[left] == nums[left + 1])
-                            left++; // imagine [1,2,2,2,3,4] --> 1 - [2,2,2,3,4] -> 1 - [2,3,4]
+                            left++; // e.g. [1,2,2,2,3,4] --> [1(i),2(l),2,2,3,4(r)] -> [1(i),2,2,2(l),3,4(r)]
                         while (left < right && nums[right] == nums[right - 1])
-                            right--; // imagine [1,2,3,4,4,4] --> 1 - [2,3,4,4,4] -> 1 - [2,3,4]
-                        left++; // since 2 was already used - move to next: 1 - [3,4]
-                        right--; // since 4 was already used - move to next: 1 - [2,3]
+                            right--; // e.g. [1,2,3,4,4,4] --> [1(i),2(l),3,4,4,4(r)] -> [1(i),2(l),3,4(r),4,4]
+                        left++; // since 2 was already used - move to next: [1(i),2,2,2,3(l),4(r)]
+                        right--; // since 4 was already used - move to next: [1(i),2(l),3(r),4,4,4]
                     } else if (threeSum > 0) {
                         right--;
                     } else {

@@ -76,7 +76,18 @@ public class PermutationInString {
     }
 
     // sliding window recap.
-    // window here is a size of a s1 (smaller string)
+    // the idea - create char frequency array for little string (s1), then go with sliding window
+    // (which size is equal to length of little string s1) through s2
+    // and compare frequency arrays
+
+    // window here is char frequency in s2
+
+    // about this shrinking part:
+    // slidingFreq2[s2.charAt(i - s1.length()) - 'a']--;
+    // example:
+    // s1.length == 2, i = 2 -> 2-2=0 -> charAt(0)
+    // i = 3 -> 3-2=1 -> charAt(1)
+    // you shrink frequency from left char to right
     public static boolean checkInclusion2(String s1, String s2) {
         // first create a frequency array for s1, so further frequency comparison with s2
         int[] freq1 = new int[26];

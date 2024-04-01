@@ -125,7 +125,8 @@ public class LongestSubstringWORepeatingChars {
 
     // sliding window approach recap.
     // if char is not in set, then check for maxLength and expand a window to the right.
-    // if char IS in set, then shrink the window from the left by moving left pointer and removing current left value from the set
+    // if char IS in set, then shrink the window from the left by
+    // moving left pointer and removing current left value from the set
     public static int lengthOfLongestSubstring3(String s) {
         int left = 0, right = 0, maxLength = 0;
         Set<Character> set = new HashSet<>();
@@ -134,10 +135,10 @@ public class LongestSubstringWORepeatingChars {
             if (!set.contains(s.charAt(right))) {
                 set.add(s.charAt(right));
                 maxLength = Math.max(maxLength, right - left + 1); // +1 is to deal with edge case like 0 - 0 + 1 (zero based!)
-                right++;
+                right++; // expand window when there are no dups
             } else {
                 set.remove(s.charAt(left));
-                left++;
+                left++; // shrink window when there are dups
             }
         }
 

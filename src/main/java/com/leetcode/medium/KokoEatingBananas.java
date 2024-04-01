@@ -6,7 +6,8 @@ package com.leetcode.medium;
  * Koko loves to eat bananas. There are n piles of bananas, the ith pile has piles[i] bananas.
  * The guards have gone and will come back in h hours.
  * <p>
- * Koko can decide her bananas-per-hour eating speed of k. Each hour, she chooses some pile of bananas and eats k bananas from that pile.
+ * Koko can decide her bananas-per-hour eating speed of k. Each hour,
+ * she chooses some pile of bananas and eats k bananas from that pile.
  * If the pile has less than k bananas, she eats all of them instead and will not eat any more bananas during this hour.
  * <p>
  * Koko likes to eat slowly but still wants to finish eating all the bananas before the guards return.
@@ -34,10 +35,11 @@ public class KokoEatingBananas {
         System.out.println(minEatingSpeed(new int[]{30, 11, 23, 4, 20}, 6)); // 23
     }
 
-    // the idea - maximum required speeed (banana/hour) will be equal to maximum value among piles
+    // the idea - maximum required speed (banana/hour) will be equal to maximum value among piles
     // e.g. [3, 6, 7, 11] - with 11 banana/hour Koko will eat the biggest pile and others with no problem
     // and we can take 1 as a minimum speed.
-    // so basically we have a 1...maxPile numbers, and we can apply binary search, so we can find minimum required speed, which will fit the x < h condition
+    // so basically we have a 1...maxPile numbers, and we can apply binary search,
+    // so we can find minimum required speed, which will fit the x < h condition
     public static int minEatingSpeed(int[] piles, int h) {
         int left = 1, right = 1;
         // find the maximum pile
@@ -52,7 +54,8 @@ public class KokoEatingBananas {
             int hourSpent = 0;
 
             // Iterate over the piles and calculate hourSpent.
-            // We increase the hourSpent by ceil(pile / middle), e.g. 1 (banana)/2 (banana/hour) = 1 hour (remember, Koko do nothing after it finish with a pile)
+            // We increase the hourSpent by ceil(pile / middle),
+            // e.g. 1 (banana)/2 (banana/hour) = 1 hour (remember, Koko do nothing after it finish with a pile)
             for (int pile : piles) {
                 hourSpent += Math.ceil((double) pile / middleSpeed);
             }
@@ -60,9 +63,9 @@ public class KokoEatingBananas {
 
             // Check if middle is a workable speed, and cut the search space by half.
             if (hourSpent <= h) {
-                right = middleSpeed - 1;
+                right = middleSpeed - 1; // speed is enough, but maybe she could be faster
             } else {
-                left = middleSpeed + 1;
+                left = middleSpeed + 1; // time is not enough to eat all, increase speed
             }
         }
 

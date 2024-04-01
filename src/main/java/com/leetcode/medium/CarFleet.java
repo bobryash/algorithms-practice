@@ -50,24 +50,30 @@ public class CarFleet {
     // intuition:
     // position(speed): 0(1) 3(3) 5(1) 8(4) 10(2) ---> target (12)
     // time until car reaches the end (without any blocks): s/v = (target - position[i]) / speed[i]
-    // if time of car 1 is less than a near car 2, then 1 will catch up with 2, and by description they could be considered as one - 2 alone(slowest)
+    // if time of car 1 is less than a near car 2, then 1 will catch up with 2,
+    // and by description they could be considered as one - 2 alone(slowest)
     //
-    // the idea - to additionally keep cars in stack, and if we find there faster one than the current, then pop the faster one, and leave only the slow one
+    // the idea - to additionally keep cars in stack, and if we find there is a
+    // faster one than the current, then pop the faster one, and leave only the slow one
+    // (because only the speed of the slowest one will matter - one line road!)
     public static int carFleet(int target, int[] position, int[] speed) {
         Car[] cars = new Car[position.length];
         for (int i = 0; i < cars.length; i++) {
             cars[i] = new Car(position[i], (double) (target - position[i]) / speed[i]);
         }
 
-        Arrays.sort(cars, Comparator.comparingInt(v -> v.position)); // from lesser to bigger: (0, 12.0), (3, 3.0), (5, 7.0), (8, 1.0), (10, 1.0)
+        // from lesser to bigger (target position = 12!): (0, 12.0), (3, 3.0), (5, 7.0), (8, 1.0), (10, 1.0)
+        Arrays.sort(cars, Comparator.comparingInt(v -> v.position));
         Stack<Car> stack = new Stack<>();
 
         // if current car's time (till the finish) is bigger than time of current on top of stack (let's call it previous),
         // it means that stack's car is going to catch up with current one (because stack's car it faster).
-        // but from the description - it can't go around a slower car, and it will follow it as one fleet, with slower car's speed.
+        // but from the description - it can't go around a slower car,
+        // and it will follow it as one fleet, with slower car's speed.
         // so we consider it as one fleet, and we can pop up the fast car from the stack.
         for (Car car : cars) {
-            while (!stack.isEmpty() && car.timeToFinish >= stack.peek().timeToFinish) { // stack's car is faster and will catch up, and they'll become a slow fleet
+            // stack's car is faster and will catch up with current car, and they'll become a slow fleet
+            while (!stack.isEmpty() && car.timeToFinish >= stack.peek().timeToFinish) {
                 stack.pop();
             }
             stack.push(car);
