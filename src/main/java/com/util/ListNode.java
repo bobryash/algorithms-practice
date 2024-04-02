@@ -14,12 +14,6 @@ public class ListNode {
         this.next = next;
     }
 
-    public ListNode(int val, ListNode next, ListNode random) {
-        this.val = val;
-        this.next = next;
-        this.random = random;
-    }
-
     public ListNode next(ListNode node) {
         this.next = node;
         return this;
