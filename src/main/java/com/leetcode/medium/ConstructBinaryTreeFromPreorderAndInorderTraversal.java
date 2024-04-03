@@ -33,35 +33,62 @@ public class ConstructBinaryTreeFromPreorderAndInorderTraversal {
         );
     }
 
+    // something about tree traversals:
+    //
+    // 1. preorder array will always have a root in the beginning index
+    //               3
+    //             /   \
+    //            9     20
+    //                 /  \
+    //                15   7
+    // preorder (visit-left-right): [3(root), 9, 20, 15, 7]
+    //
+    // 2. in inorder array, all elements to the left side from root node belong to the left subtree,
+    // all elements on the right side - to the right subtree
+    //               3
+    //             /   \
+    //            9     20
+    //                 /  \
+    //                15   7
+    // inorder (left-visit-right): [9, 3, 15, 20, 7] - [9] 3(root) [15, 20, 7]
+    //
+    // so the idea - get root from preorder(always first), create node, then find index of that node in inorder,
+    // so we can calculate size of a left tree(by using above rules), then create left and right nodes
+    // by cutting left and right subtrees in inorder and preorder arrays by measuring them:
+    //
+    // - measure preorder with left tree size
+    //  [3, (9 left subtree= root(arrays start)+1<->root+leftTreeSize), (20, 15, 7 right subtree = root+1+leftTree<->endOfArray)]
+    //
+    // - measure inorder with inorder root index:
+    //  [(9 left subtree = array start<->root - 1), 3(root index), (20, 15, 7 right subtree(root + 1 <-> end of array]
     public static TreeNode buildTree(int[] preorder, int[] inorder) {
         return treeBuilder(preorder, 0, preorder.length - 1,
                 inorder, 0, inorder.length - 1);
     }
 
-    // the idea is to know how to divide preorder and inorder arrays, so we can find the root in them, and then extract left and right trees relative to the root
     private static TreeNode treeBuilder(int[] preorder, int preStart, int preEnd,
                                         int[] inorder, int inStart, int inEnd) {
         if (preStart > preEnd || inStart > inEnd) {
             return null;
         }
 
-        int rootValue = preorder[preStart]; // nature of a preorder - root always be at the very beginning
+        int rootValue = preorder[preStart]; // nature of preorder - root always be at the very beginning
         TreeNode root = new TreeNode(rootValue);
 
         int inOrderRootIndex = getIndex(inorder, rootValue, inStart, inEnd); // now can find root in inorder
         int leftTreeSize = inOrderRootIndex - inStart; // and calculate size of a left tree
 
         // to figure all of these indexes just look at the arrays and the original tree, it's almost easy
-        root.left = treeBuilder(preorder, inStart + 1, inStart + leftTreeSize,
+        root.left = treeBuilder(preorder, preStart + 1, preStart + leftTreeSize,
                 inorder, inStart, inOrderRootIndex - 1);
-        root.right = treeBuilder(preorder, inStart + 1 + leftTreeSize, preEnd,
+        root.right = treeBuilder(preorder, preStart + 1 + leftTreeSize, preEnd,
                 inorder, inOrderRootIndex + 1, inEnd);
 
         return root;
     }
 
     private static int getIndex(int[] inorder, int target, int start, int end) {
-        for (int i = start; i <= end; i++) {
+        for (int i = start; i <= end; i++) { // <= because we use 0-based indexes
             if (target == inorder[i]) {
                 return i;
             }

@@ -78,7 +78,7 @@ public class SubtreeOfAnotherTree {
             return true;
         }
 
-        // second question - is subRoot is the subRoot of left and right children?
+        // second question - is subRoot is the subRoot of left or right children?
         return isSubtree(root.left, subRoot) || isSubtree(root.right, subRoot);
     }
 

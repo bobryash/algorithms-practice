@@ -52,17 +52,18 @@ public class ValidateBinarySearchTree {
     }
 
     public static boolean isValidBST(TreeNode root) {
-        return valid(root, null, null); // nulls instead of Integer.MIN/MAX, because there's a test case
+        // min = max = null - initial valid range
+        return valid(root, null, null);
     }
 
     private static boolean valid(TreeNode node, Integer min, Integer max) {
         if (node == null) return true; // technically a valid BST
 
-        // all these non-null checks just to bypass Integer.MAX/MIN issue, they have a test case for it
         if ((min != null && node.val <= min) || (max != null && node.val >= max)) {
             return false;
         }
 
+        // max for left node(should be less than root=max), min for right node(should be more than root=min)
         return valid(node.left, min, node.val) && valid(node.right, node.val, max);
     }
 }

@@ -6,7 +6,7 @@ import com.util.TreeNode;
  * #110. Balanced Binary Tree
  *
  * Given a binary tree, determine if it is height-balanced.
- * (which subtrees differs in length no more than 1-level)
+ * (which subtrees differs in height no more than 1-level)
  * .
  * Example 1:
  *        3
@@ -91,13 +91,13 @@ public class BalancedBinaryTree {
         if (root.right != null) {
             rightH = dfs(root.right);
         }
-        if (rightH == UNBALANCED) return  UNBALANCED;
+        if (rightH == UNBALANCED) return UNBALANCED;
 
         // Check current tree (if balanced - return height, for further calculations. if not return UNBALANCED)
-        if (Math.abs(rightH - leftH) <= 1) {
-            return Math.max(rightH, leftH) + 1; // +1 - height with current node considered
-        } else {
+        if (Math.abs(rightH - leftH) > 1) {
             return UNBALANCED;
+        } else {
+            return Math.max(rightH, leftH) + 1; // +1 - height of current subtree with current node considered
         }
     }
 }

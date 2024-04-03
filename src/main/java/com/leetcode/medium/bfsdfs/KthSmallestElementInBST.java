@@ -39,7 +39,7 @@ public class KthSmallestElementInBST {
         root.right = new TreeNode(4);
         root.left.right = new TreeNode(2);
 
-        System.out.println(kthSmallest(root, 1)); // 1
+        //System.out.println(new KthSmallestElementInBST().kthSmallest(root, 1)); // 1
 
         // Example 2:
         TreeNode root1 = new TreeNode(5);
@@ -49,20 +49,20 @@ public class KthSmallestElementInBST {
         root1.left.right = new TreeNode(4);
         root1.left.left.left = new TreeNode(1);
 
-        System.out.println(kthSmallest(root1, 3)); // 3
+        System.out.println(new KthSmallestElementInBST().kthSmallest(root1, 3)); // 3
     }
 
-    static int count = 0;
-    static int result = 0;
+    int count = 0;
+    int result = 0;
 
-    public static int kthSmallest(TreeNode root, int k) {
+    public int kthSmallest(TreeNode root, int k) {
         inOrderTraverse(root, k);
         return result;
     }
 
     // the idea - in order traverse ensures that we go in ascending order.
     // what is left is to stop when count == k
-    private static void inOrderTraverse(TreeNode node, int k) {
+    private void inOrderTraverse(TreeNode node, int k) {
         if (node == null) {
             return;
         }

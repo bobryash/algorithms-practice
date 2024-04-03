@@ -78,6 +78,7 @@ public class MaximumDepthOfBinaryTree {
             return 0;
         }
 
+        // + 1 to include the height of the current node
         return 1 + Math.max(maxDepthDFS(root.left), maxDepthDFS(root.right));
     }
 
@@ -92,7 +93,9 @@ public class MaximumDepthOfBinaryTree {
         int depth = 0;
 
         while (!queue.isEmpty()) {
-            int levelSize = queue.size(); // dynamic nature of the queue! queue will be updated in the loop and size will be changed. so you should store initial size beforehand
+            // dynamic nature of the queue! queue will be updated in the loop and size will be changed.
+            // so you should store initial size beforehand.
+            int levelSize = queue.size();
             for (int i = 0; i < levelSize; i++) { // so don't even think about ..; i < queue.size();..
                 TreeNode currentNode = queue.poll();
 

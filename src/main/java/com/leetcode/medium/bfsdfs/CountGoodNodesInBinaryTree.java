@@ -64,8 +64,8 @@ public class CountGoodNodesInBinaryTree {
     }
 
     // the idea - compare each node's value to previous maxValue up the tree.
-    // start with root (you can compare it with whatever, it always be a good node), then pass it to children,
-    // then choose max between root and children, then pass it down
+    // start with root (you compare it with itself, hence it'll always be a good node),
+    // then pass current max value to children and keep comparing
     public static int goodNodes(TreeNode root) {
         return dfs(root, root.val);
     }

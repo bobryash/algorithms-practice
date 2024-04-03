@@ -44,6 +44,7 @@ public class BinaryTreeRightSideView {
         System.out.println(rightSideView(root));
     }
 
+    // classic BFS
     public static List<Integer> rightSideView(TreeNode root) {
         List<Integer> result = new ArrayList<>();
         if (root == null) return result;
