@@ -27,6 +27,7 @@ public class Subsets {
         System.out.println(subsets(new int[]{0})); // [[0], []]
     }
 
+    // dfs
     // the idea - to have two choices: when we add or not add an element to result subsets.
     // choice is made -> move to next element. create branches with all possibilities.
     // first recursively add elements, then backtrack by removing last added elements
