@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * #659. Encode and Decode Strings
+ * #271. Encode and Decode Strings
  * <p>
  * Design an algorithm to encode a list of strings to a string.
  * The encoded string is then sent over the network and is decoded back to the original list of strings.
@@ -65,8 +65,7 @@ public class EncodeAndDecodeStrings {
             }
             int length = Integer.parseInt(str.substring(i, j));
             result.add(str.substring(j + 1, j + length + 1));
-            i = j + length + 1;
-            j = i;
+            j = i = j + length + 1;
         }
 
         return result;

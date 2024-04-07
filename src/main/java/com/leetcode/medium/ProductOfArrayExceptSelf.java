@@ -26,12 +26,13 @@ public class ProductOfArrayExceptSelf {
     }
 
     //  a b c d
-    //
-    //  prefix ---> :
-    //  | 1 | a | a * b | a * b * c |
-    //  postfix <--- :
-    //  |b * c * d |  c * d | d | 1 |
-    //  product:
+    //  algorithm goes forward and back ---> 0 1 2 3 -> 3 2 1 0
+    //  (goes through result array, not nums)
+    //  prefix --->              --->
+    //  | 1 | a | a * b | a * b * c | (set first vals in result with prefix)
+    //  postfix <--- :           <---
+    //  |b * c * d |  c * d | d | 1 | (multiply result by postfix, backwards)
+    //  result is:
     //  |b * c * d | a * c * d | a * b * d | a * b * c
     //
     //  (1 before and 1 after because no post/pre product for first and last value)
@@ -41,7 +42,7 @@ public class ProductOfArrayExceptSelf {
         int prefix = 1;
         for (int i = 0; i < nums.length; i++) {
             result[i] = prefix;
-            prefix *= nums[i];
+            prefix = prefix * nums[i];
         }
 
         int postfix = 1;

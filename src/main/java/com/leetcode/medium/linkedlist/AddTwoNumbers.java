@@ -48,7 +48,7 @@ public class AddTwoNumbers {
 
             // modulus operator!
             // If the dividend (sum) is smaller than the divisor (10),
-            // the result of the modulo operation will be equal to the dividend.
+            // the result of the modulus operation will be equal to the dividend.
             // or it will return reminder of division
             // 7 % 10 = 7, 14 % 10 = 4
             curr.next = new ListNode(sum % 10);
