@@ -24,20 +24,20 @@ import java.util.List;
 public class SubsetsII {
 
     public static void main(String[] args) {
-        // System.out.println(subsetsWithDup(new int[]{1, 2, 2})); // [[],[1],[1,2],[1,2,2],[2],[2,2]]
+        System.out.println(subsetsWithDup(new int[]{1, 2, 2})); // [[],[1],[1,2],[1,2,2],[2],[2,2]]
         System.out.println(subsetsWithDup(new int[]{1, 2, 2, 3})); // [[],[1],[1,2],[1,2,2],[2],[2,2]]
-        // System.out.println(subsetsWithDup(new int[]{0}));
+        System.out.println(subsetsWithDup(new int[]{0}));
     }
 
     public static List<List<Integer>> subsetsWithDup(int[] nums) {
         Arrays.sort(nums);
         List<List<Integer>> ans = new ArrayList<>();
         List<Integer> list = new ArrayList<>();
-        helper2(ans, list, nums, 0);
+        backtrack(ans, list, nums, 0);
         return ans;
     }
 
-    public static void helper(
+    public static void backtrack(
             List<List<Integer>> ans,
             List<Integer> tempList,
             int[] nums,
@@ -50,26 +50,26 @@ public class SubsetsII {
             }
 
             tempList.add(nums[i]);
-            helper(ans, tempList, nums, i + 1);
+            backtrack(ans, tempList, nums, i + 1);
             tempList.remove(tempList.size() - 1);
         }
     }
 
     // same with comments
-    public static void helper2(
-            List<List<Integer>> ans,
+    public static void backtrack2(
+            List<List<Integer>> answer,
             List<Integer> tempList,
             int[] nums,
             int start) {
         // to add empty set - won't happen in for-cycle
-        ans.add(new ArrayList<>(tempList));
+        answer.add(new ArrayList<>(tempList));
         System.out.println("Got answer: " + tempList);
 
         // cycle termination here is an implicit base case.
-        // we use cycle's i instead of start for index (as in I).
+        // we use cycle's i instead of start for index.
         // and i's increment shifts index to the next value
         for (int i = start; i < nums.length; i++) {
-            // skip the duplicate elements
+            // skip the duplicate elements (the only difference from Subsets I
             if (i > start && nums[i] == nums[i - 1]) {
                 System.out.println("Skipped duplicate: " + nums[i]);
                 continue;
@@ -79,11 +79,8 @@ public class SubsetsII {
             // same as in Subsets I...
             tempList.add(nums[i]);
             System.out.println(" After: " + tempList  + " index: " + i);
-            helper2(ans, tempList, nums, i + 1);
+            backtrack2(answer, tempList, nums, i + 1);
             tempList.remove(tempList.size() - 1);
-            // ... but instead of following Subsets I like:
-            // helper(answer, tempList, nums, i + 1);
-            // here i increment moving index forward + handles dups
             System.out.println("Popped last one");
         }
     }
