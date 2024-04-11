@@ -50,7 +50,6 @@ public class HouseRobber {
             int curRob = notRob + num; // if rob current value, previous house must not be robbed (hence add to prev not rob value)
             notRob = Math.max(notRob, rob); // if not rob then choose max from the previous iteration
             rob = curRob;
-            System.out.println();
         }
 
         return Math.max(rob, notRob);
