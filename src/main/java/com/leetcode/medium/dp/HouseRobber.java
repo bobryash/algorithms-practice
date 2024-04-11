@@ -1,7 +1,7 @@
 package com.leetcode.medium.dp;
 
 /**
- * #198
+ * #198. House Robber
  * <p>
  * You are a professional robber planning to rob houses along a street.
  * Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them
@@ -28,9 +28,8 @@ package com.leetcode.medium.dp;
 public class HouseRobber {
 
     public static void main(String[] args) {
-        int result = new HouseRobber().rob(new int[]{2, 7, 9, 3, 1});
-
-        System.out.println(result);
+        System.out.println(rob(new int[]{1, 2, 3, 1}));
+        System.out.println(rob(new int[]{2, 7, 9, 3, 1}));
     }
 
     // Example Input :         1, 3, 4, 2, 5,  7,  2, 3
@@ -42,7 +41,7 @@ public class HouseRobber {
     // input    2 7 9  3  1
     // rob      2 7 11 10 12
     // not rob  0 2 7  11 11
-    public int rob(int[] nums) {
+    public static int rob(int[] nums) {
         int rob = 0; // max money can get if rob current house
         int notRob = 0; // max money can get if not rob current house
 
