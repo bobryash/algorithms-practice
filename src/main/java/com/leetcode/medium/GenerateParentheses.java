@@ -20,28 +20,28 @@ public class GenerateParentheses {
 
     public static void main(String[] args) {
         System.out.println(String.join(", ", generateParenthesis(3))); // ((())), (()()), (())(), ()(()), ()()()
-        // System.out.println(String.join(", ", generateParenthesis(1))); // ()
+        System.out.println(String.join(", ", generateParenthesis(1))); // ()
     }
 
-    static List<String> result = new ArrayList<>();
-
     public static List<String> generateParenthesis(int n) {
-        backtrack(0, 0, n, "");
+        List<String> result = new ArrayList<>();
+        String tempStr = "";
+        backtrack(result, 0, 0, n, tempStr);
         return result;
     }
 
     // backtracking power
-    static void backtrack(int opened, int closed, int n, String s) {
+    static void backtrack(List<String> result, int opened, int closed, int n, String s) {
         if (opened == closed && opened == n) { // base case
-            result.add(s);
+            result.add(s); // copy is added - string is immutable
         }
 
         if (opened < n) { // can only add ( when some capacity is left
-            backtrack(opened + 1, closed, n, s + "(");
+            backtrack(result, opened + 1, closed, n, s + "(");
         }
 
         if (closed < opened) { // make sense to add closed only when there are some opened
-            backtrack(opened, closed + 1, n, s + ")");
+            backtrack(result, opened, closed + 1, n, s + ")");
         }
     }
 }

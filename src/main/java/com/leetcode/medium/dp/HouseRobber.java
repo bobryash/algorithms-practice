@@ -28,8 +28,8 @@ package com.leetcode.medium.dp;
 public class HouseRobber {
 
     public static void main(String[] args) {
-        System.out.println(rob(new int[]{1, 2, 3, 1}));
-        System.out.println(rob(new int[]{2, 7, 9, 3, 1}));
+        System.out.println(rob(new int[]{1, 2, 3, 1})); // 4
+        System.out.println(rob(new int[]{2, 7, 9, 3, 1})); // 12
     }
 
     // Example Input :         1, 3, 4, 2, 5,  7,  2, 3
@@ -41,16 +41,24 @@ public class HouseRobber {
     // input    2 7 9  3  1
     // rob      2 7 11 10 12
     // not rob  0 2 7  11 11
-    public static int rob(int[] nums) {
-        int rob = 0; // max money can get if rob current house
-        int notRob = 0; // max money can get if not rob current house
 
-        for (int num : nums) {
-            int curRob = notRob + num; // if rob current value, previous house must not be robbed (hence add to prev not rob value)
-            notRob = Math.max(notRob, rob); // if not rob then choose max from the previous iteration
-            rob = curRob;
+    // the idea - for each house, you choose max of these values
+    // (which basically represent 2 choices: rob or not to rob current house):
+    // 1. current house rob value + rob max of every house to the left, EXCEPT adjusted one (can't rob it).
+    // 2. value of an adjusted house to left, which represent current rob max amount of ALL houses to the left
+    // (which is already calculated).
+    // incrementally build the result from left to right, solving sub-problems,
+    // staring with base case (rob/not rob first house).
+    // dp breaks it into sub-problems: rob = max(houses[0] + rob[2..n], rob[1...n]) - each rob is sub-problem
+    public static int rob(int[] nums) {
+        int robAndPlusWithCurrent = 0, dontRobAndTakeCurMax = 0; // 0 0 1, 2, 3, 4 -> 1, 2, 4, 4 (result)
+
+        for (int current: nums) {
+            int temp = dontRobAndTakeCurMax;
+            dontRobAndTakeCurMax = Math.max(current + robAndPlusWithCurrent, dontRobAndTakeCurMax);
+            robAndPlusWithCurrent = temp;
         }
 
-        return Math.max(rob, notRob);
+        return dontRobAndTakeCurMax;
     }
 }
