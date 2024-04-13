@@ -46,11 +46,14 @@ public class HouseRobber {
     // (which basically represent 2 choices: rob or not to rob current house):
     // 1. current house rob value + rob max of every house to the left, EXCEPT adjusted one (can't rob it).
     // 2. value of an adjusted house to left, which represent current rob max amount of ALL houses to the left
-    // (which is already calculated).
+    // (which is already calculated) (and doesn't include (rob) current house value)
     // incrementally build the result from left to right, solving sub-problems,
-    // staring with base case (rob/not rob first house).
+    // staring with base case (rob/not rob first house), store these sums in two variables.
     // dp breaks it into sub-problems: rob = max(houses[0] + rob[2..n], rob[1...n]) - each rob is sub-problem
     public static int rob(int[] nums) {
+        // for input 1 2 3 1, i = 3
+        // robAndPlusWithCurrent - sum of everything to the left, except adjusted house:[1(robAndPlusWithCurrent),2,3(i), 4]
+        // dontRobAndTakeCurMax - sum of everything to the left, except adjusted house:[1,2(dontRobAndTakeCurMax),3(i), 4]
         int robAndPlusWithCurrent = 0, dontRobAndTakeCurMax = 0; // 0 0 1, 2, 3, 4 -> 1, 2, 4, 4 (result)
 
         for (int current: nums) {
