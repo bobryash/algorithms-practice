@@ -27,6 +27,11 @@ public class PalindromicSubstrings {
         System.out.println(countSubstrings("aaa")); // 6
     }
 
+    // the idea - same as in #5 - The Longest Palindromic substring:
+    // for each char in a string, try to expand to left and to the right from it,
+    // trying to find a palindrome.
+    // when chars from left and right of the center char match, expand and do count++
+    // N.B.: do not forget about even-centered palindromes! "abba"
     public static int countSubstrings(String s) {
         int count = 0;
         for (int i = 0; i < s.length(); i++) {
