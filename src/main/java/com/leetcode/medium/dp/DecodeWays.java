@@ -91,4 +91,33 @@ public class DecodeWays {
 
         return prev;
     }
+
+    // if use dp array, index i in for-each loop is not related to any input (string' or array' index),
+    // it's a current dynamic calculation which is basing on previous calculations, starting with base cases
+    // _226
+    public static int numDecodings2(String s) {
+        // +1 to make room for one of base cases - first empty string
+        int[] dp = new int[s.length() + 1];
+        dp[0] = 1; // empty string
+        dp[1] = s.charAt(0) == '0' ? 0 : 1;
+
+        for (int i = 2; i < dp.length; i++) {
+            // these two ints both represent letter indexes in alphabet
+            // (substring's last index is non-inclusive + handles outofbounds exception)
+            int oneDigit = Integer.parseInt(s.substring(i - 1, i));
+            int twoDigits = Integer.parseInt(s.substring(i - 2, i));
+
+            // can parse as 1 digit
+            if (1 <= oneDigit && oneDigit <= 9) {
+                dp[i] += dp[i - 1];
+            }
+
+            // can parse as 2 digits
+            if (10 <= twoDigits && twoDigits <= 26) {
+                dp[i] += dp[i - 2];
+            }
+        }
+
+        return dp[dp.length - 1];
+    }
 }
