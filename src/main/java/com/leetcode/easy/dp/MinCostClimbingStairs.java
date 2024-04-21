@@ -57,4 +57,24 @@ public class MinCostClimbingStairs {
 
         return Math.min(cost[0], cost[1]);
     }
+
+    public static int minCostClimbingStairs2(int[] cost) {
+        // +1 to make space for the base case, top of the ladder, which cost is 0
+        // [10, 15, 20] null(this!)
+        int[] dp = new int[cost.length + 1];
+        // base cases
+        dp[0] = 0; // it's defaulted to 0 already, but to make it explicit
+        dp[1] = cost[0]; // can do only one step to the top, from step right before the top
+
+        // each intermediate result will be the result of the previously calculated results,
+        // calculation starts will base cases.
+        // here start with i=2, because we have i=0 and i=1 calculated (base cases)
+        for (int i = 2; i < dp.length; i++) {
+            // dp array is bigger than cost by 1, so do -1
+            dp[i] = Math.min(cost[i - 1] + dp[i - 1], cost[i - 1] + dp[i - 2]);
+        }
+
+        // since you can start either from 1 or 2 step
+        return Math.min(dp[dp.length - 1], dp[dp.length - 2]);
+    }
 }
