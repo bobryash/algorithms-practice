@@ -60,8 +60,16 @@ public class DesignTwitter {
         System.out.println(twitter.getNewsFeed(1)); // [5]
     }
 
+    // userId -> list of her tweets
+    // no method for removing tweets, so list is ok -> adding in the end of a list is O(1)
     private final Map<Integer, List<Tweet>> tweets;
+
+    // userId -> set of users she follows
+    // we need to be able to follow/unfollow, and followee ids will be unique,
+    // so set is more optimal than list - add and remove will be O(1)
     private final Map<Integer, Set<Integer>> follows;
+
+    // save tweet with current timestamp, so we can compare them
     private int timestamp;
     private static final int NEWSFEED_LIMIT = 10;
 
