@@ -99,7 +99,7 @@ public class DecodeWays {
         // +1 to make room for one of base cases - first empty string
         int[] dp = new int[s.length() + 1];
         dp[0] = 1; // empty string
-        dp[1] = s.charAt(0) == '0' ? 0 : 1;
+        dp[1] = s.charAt(0) == '0' ? 0 : 1; // strings which start with 0 are invalid
 
         for (int i = 2; i < dp.length; i++) {
             // these two ints both represent letter indexes in alphabet
