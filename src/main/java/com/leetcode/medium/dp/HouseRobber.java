@@ -64,4 +64,26 @@ public class HouseRobber {
 
         return dontRobAndTakeCurMax;
     }
+
+    public static int rob2(int[] nums) {
+        // +1 to make space for a base case: _(this),h1,h2,h3
+        // for house h2 you don't have houses beyond h1, so let's pretend that value there is 0
+        int[] dp = new int[nums.length + 1];
+
+        // base cases
+        dp[0] = 0; // _(here), h1, h2, h3
+        dp[1] = nums[0]; // _, h1(here), h2, h3
+
+        // each index value in dp will be a result of previously calculated results,
+        // starting calculations with base cases. here - starting with i=2 (0 and 1 are known, base cases)
+        // dp[2] = max of (rob house value (i-1) + value of skipping adjusted and taking whatever is in dp[i-2],
+        // or (don't rob house and take whatever is in adjusted dp value: dp[i-1])
+        for (int i = 2; i < dp.length; i++) {
+            // dp array is bigger than nums by 1, so do -1
+            dp[i] = Math.max(nums[i - 1] + dp[i - 2], dp[i - 1]); // just adjusted, or cur + skip adjusted
+        }
+
+        // because we can start from first or second house
+        return Math.max(dp[dp.length - 1], dp[dp.length - 2]);
+    }
 }
