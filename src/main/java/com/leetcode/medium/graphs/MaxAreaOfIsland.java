@@ -1,9 +1,9 @@
-package com.leetcode.medium.bfsdfs;
+package com.leetcode.medium.graphs;
 
 import java.util.Arrays;
 
 /**
- * #695
+ * #695. Max Area of Island
  * <p>
  * You are given an m x n binary matrix grid. An island is a group of 1's (representing land)
  * connected 4-directionally (horizontal or vertical.) You may assume all four edges of the grid are
@@ -14,6 +14,7 @@ import java.util.Arrays;
  * Return the maximum area of an island in grid. If there is no island, return 0.
  * <p>
  * <p>
+ * Example 1:
  * Input: grid = [[0,0,1,0,0,0,0,1,0,0,0,0,0],
  * [0,0,0,0,0,0,0,1,1,1,0,0,0],
  * [0,1,1,0,1,0,0,0,0,0,0,0,0],
@@ -25,27 +26,27 @@ import java.util.Arrays;
  * Output: 6
  * Explanation: The answer is not 11, because the island must be connected 4-directionally.
  * (check the picture in a current directory)
+ *
+ * Example 2:
+ * Input: grid = [[0,0,0,0,0,0,0,0]]
+ * Output: 0
  */
-public class MaxAreaOfIsland {
+public class  MaxAreaOfIsland {
 
     public static void main(String[] args) {
-        int[][] grid = {
-                {0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0},
-                {0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0},
-                {0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0}
-        };
+        System.out.println(maxAreaOfIsland(new int[][]{
+                        {0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
+                        {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0},
+                        {0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+                        {0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0},
+                        {0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0},
+                        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
+                        {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0},
+                        {0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0}
+        }
+        )); // 6
 
-        int result = maxAreaOfIsland(grid);
-
-        System.out.println(result);
-        Arrays.stream(grid).forEach(a -> {
-            System.out.println(Arrays.toString(a)); // all zeroes
-        });
+        System.out.println(maxAreaOfIsland(new int[][]{{0, 0, 0, 0, 0, 0, 0, 0}})); // 0
     }
 
     // deep-first search
