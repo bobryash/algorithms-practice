@@ -77,7 +77,9 @@ public class WallsAndGates {
         int rows = rooms.length;
         int cols = rooms[0].length;
 
-        // add all gates to the queue
+        // initially add all gates to the queue.
+        // then all gates will be polled and all adjusted rooms (1st layer) will be added.
+        // and so on and so forth, layer by layer
         Queue<int[]> q = new LinkedList<>();
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
@@ -93,9 +95,10 @@ public class WallsAndGates {
             int[] room = q.poll();
             int i = room[0];
             int j = room[1];
+            // set current distance to the room
             rooms[i][j] = distance;
 
-            // set distance to adjusted rooms
+            // add all adjusted rooms to the next layer
             addRoom(rooms, q, i + 1, j);
             addRoom(rooms, q, i - 1, j);
             addRoom(rooms, q, i, j + 1);
