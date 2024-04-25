@@ -73,7 +73,11 @@ public class NumberOfIslands {
             return;
         }
 
+        // mark field as visited, so other searches don't count this field
         grid[i][j] = '0';
+        // expand in vertical and horizontal directions from the field,
+        // try to find more land around and mark it,
+        // so eventually you visit entire island, and eliminated it from other searches
         dfs(grid, i + 1, j);
         dfs(grid, i - 1, j);
         dfs(grid, i, j + 1);

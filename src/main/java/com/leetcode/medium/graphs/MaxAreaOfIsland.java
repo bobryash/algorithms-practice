@@ -75,9 +75,13 @@ public class  MaxAreaOfIsland {
             return 0;
         }
 
+        // mark field so other searches don't count it
         grid[i][j] = 0;
         int area = 1;
 
+        // expand in vertical and horizontal directions from the filed
+        // try to find more land, add it to area and mark it
+        // eventually you visit entire island and remove it from other searches
         area += dfs(grid, i - 1, j);
         area += dfs(grid, i + 1, j);
         area += dfs(grid, i, j - 1);
