@@ -38,36 +38,32 @@ public class RottingOranges {
 
     public static void main(String[] args) {
         // Example 1
-        int[][] example1 = new int[][]{
+        System.out.println(new RottingOranges().orangesRotting(new int[][]{
                 {2, 1, 1},
                 {1, 1, 0},
                 {0, 1, 1}
-        };
-        System.out.println(new RottingOranges().orangesRotting(example1)); // 4
+        })); // 4
 
 
         // Example 2
-        int[][] example2 = new int[][]{
+        System.out.println(new RottingOranges().orangesRotting(new int[][]{
                 {2, 1, 1},
                 {0, 1, 1},
                 {1, 0, 1}
-        };
-        System.out.println(new RottingOranges().orangesRotting(example2)); // -1
+        })); // -1
 
 
         // Example 3
-        int[][] example3 = new int[][]{
+        System.out.println(new RottingOranges().orangesRotting(new int[][]{
                 {0, 2}
-        };
-        System.out.println(new RottingOranges().orangesRotting(example3)); // 0
+        })); // 0
 
         // Example 4
-        int[][] example4 = new int[][]{
+        System.out.println(new RottingOranges().orangesRotting(new int[][]{
                 {2, 1, 1},
                 {1, 1, 0},
                 {1, 0, 1}
-        };
-        System.out.println(new RottingOranges().orangesRotting(example4)); // -1
+        })); // -1
     }
 
     // the idea is the same as in #286 - use bfs, starting with rotten oranges.
