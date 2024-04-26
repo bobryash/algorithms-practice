@@ -80,7 +80,7 @@ public class PacificAtlanticWaterFlow {
         })); // //[[0,29],[1,28],[2,28],[12,0],[12,1],[13,0]]
     }
 
-    // the idea - start from coasts, then go as high as you can.
+    // the idea - start from coasts, then go as high as you can with dfs.
     // create maps for pacific and atlantic oceans (boolean[][] - can square's water reach the ocean or not)
     // then compare these two maps, find squares which both has true in them
     public static List<List<Integer>> pacificAtlantic(int[][] heights) {
@@ -93,6 +93,8 @@ public class PacificAtlanticWaterFlow {
 
         // pacific if up and left coasts
         // atlantic is down and right coasts
+        // initially use Integer.MIN_VALUE because we start from the ocean
+        // (everything will be higher than ocean level)
 
         for (int i = 0; i < cols; i++) { // going through each column of..
             dfs(heights, canReachPacific, 0, i, Integer.MIN_VALUE); // ..first row (pacific)
