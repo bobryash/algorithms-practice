@@ -1,7 +1,9 @@
 package com.leetcode.medium.graphs;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 /**
  * #207. Course Schedule
@@ -29,17 +31,17 @@ import java.util.List;
 public class CourseSchedule {
 
     public static void main(String[] args) {
-        boolean canFinish1 = canFinish(5, new int[][]{{1, 0}});
-        System.out.println(canFinish1); // true
-
-        boolean canFinish2 = canFinish(5, new int[][]{{1, 0}, {0, 1}});
-        System.out.println(canFinish2); // false
-
+//        boolean canFinish1 = canFinish(5, new int[][]{{1, 0}});
+//        System.out.println(canFinish1); // true
+//
+//        boolean canFinish2 = canFinish(5, new int[][]{{1, 0}, {0, 1}});
+//        System.out.println(canFinish2); // false
+//
         boolean canFinish3 = canFinish(5, new int[][]{{0, 1}, {0, 2}, {1, 3}, {1, 4}, {3, 4}});
         System.out.println(canFinish3); // true
 
-        boolean canFinish4 = canFinish(5, new int[][]{{0, 1}, {1, 2}, {2, 0}});
-        System.out.println(canFinish4); // false
+//        boolean canFinish4 = canFinish(5, new int[][]{{0, 1}, {1, 2}, {2, 0}});
+//        System.out.println(canFinish4); // false
     }
 
     // the idea - topological sorting with dfs.
@@ -50,13 +52,17 @@ public class CourseSchedule {
     // then check with dfs search, if graph has a cycle
     public static boolean canFinish(int numCourses, int[][] prerequisites) {
         // build graph
+        // // this structure is a representation of a graph in code, also called an adjacency list
         List<List<Integer>> graph = new ArrayList<>();
         for (int i = 0; i < numCourses; i++) {
             graph.add(new ArrayList<>());
         }
 
-        for (int i = 0; i < prerequisites.length; i++) {
-            graph.get(prerequisites[i][0]).add(prerequisites[i][1]);
+        // build an adjacency list, which represents direct graph
+        // 0(1, 2), 1(3, 4), 2 (), 3(4), 4 ()
+        // 0(1, 2) means that 0 is the prereq for 1 and 2
+        for (int[] prerequisite : prerequisites) {
+            graph.get(prerequisite[0]).add(prerequisite[1]);
         }
 
         // check if graph has cycle
@@ -89,5 +95,46 @@ public class CourseSchedule {
 
         visited[course] = 2; // already visited in this DFS, no need to check anymore
         return false;
+    }
+
+
+    // Kahn's algorithm for topological sorting
+    // see #210' solution, it's the same apart from the return
+    public static boolean canFinish2(int numCourses, int[][] prerequisites) {
+        // this structure is a representation of a graph in code, also called an adjacency list
+        List<List<Integer>> graph = new ArrayList<>();
+        for (int i = 0; i < numCourses; i++) {
+            graph.add(new ArrayList<>());
+        }
+
+        int[] inDegrees = new int[numCourses];
+        for (int[] pair: prerequisites) {
+            int course = pair[0];
+            int preReq = pair[1];
+
+            graph.get(preReq).add(course);
+            inDegrees[course]++;
+        }
+
+        Queue<Integer> zeroInDegreeQ = new LinkedList<>();
+        for (int i = 0; i < inDegrees.length; i++) {
+            if (inDegrees[i] == 0) {
+                zeroInDegreeQ.offer(i);
+            }
+        }
+
+        List<Integer> result = new ArrayList<>();
+        while(!zeroInDegreeQ.isEmpty()) {
+            int course = zeroInDegreeQ.poll();
+            result.add(course);
+            for (int dependent: graph.get(course)) {
+                inDegrees[dependent]--;
+                if (inDegrees[dependent] == 0) {
+                    zeroInDegreeQ.offer(dependent);
+                }
+            }
+        }
+
+        return result.size() == numCourses;
     }
 }
