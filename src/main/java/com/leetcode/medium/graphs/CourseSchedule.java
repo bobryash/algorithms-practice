@@ -31,17 +31,17 @@ import java.util.Queue;
 public class CourseSchedule {
 
     public static void main(String[] args) {
-//        boolean canFinish1 = canFinish(5, new int[][]{{1, 0}});
-//        System.out.println(canFinish1); // true
-//
-//        boolean canFinish2 = canFinish(5, new int[][]{{1, 0}, {0, 1}});
-//        System.out.println(canFinish2); // false
-//
+        boolean canFinish1 = canFinish(5, new int[][]{{1, 0}});
+        System.out.println(canFinish1); // true
+
+        boolean canFinish2 = canFinish(5, new int[][]{{1, 0}, {0, 1}});
+        System.out.println(canFinish2); // false
+
         boolean canFinish3 = canFinish(5, new int[][]{{0, 1}, {0, 2}, {1, 3}, {1, 4}, {3, 4}});
         System.out.println(canFinish3); // true
 
-//        boolean canFinish4 = canFinish(5, new int[][]{{0, 1}, {1, 2}, {2, 0}});
-//        System.out.println(canFinish4); // false
+        boolean canFinish4 = canFinish(5, new int[][]{{0, 1}, {1, 2}, {2, 0}});
+        System.out.println(canFinish4); // false
     }
 
     // the idea - topological sorting with dfs.
