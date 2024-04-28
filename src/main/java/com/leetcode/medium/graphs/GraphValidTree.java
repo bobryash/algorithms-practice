@@ -83,10 +83,11 @@ public class GraphValidTree {
         visited[curNode] = true;
         for (int nei: graph.get(curNode)) {
             if (!visited[nei]) { // we haven't visited this neighbour, so proceed with checks
-                if (hasCycle(graph, visited, nei, curNode))
+                if (hasCycle(graph, visited, nei, curNode)) {
                     return true;
-            } else if (nei != prevNode) { // node was already visited, but it's not a prevNode..
-                return true; // ..meaning cycle
+                }
+            } else if (visited[nei] && nei != prevNode) { // nei was already visited, but it's not a prevNode..
+                return true; // ..meaning it's a cycle
             }
         }
 
