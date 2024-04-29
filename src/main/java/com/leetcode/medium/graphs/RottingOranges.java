@@ -76,8 +76,8 @@ public class RottingOranges {
     public int orangesRotting(int[][] grid) {
         int rows = grid.length;
         int cols = grid[0].length;
-        Queue<int[]> q = new LinkedList<>();
 
+        Queue<int[]> q = new LinkedList<>();
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 if (grid[i][j] == 1) {
