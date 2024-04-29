@@ -41,6 +41,10 @@ public class NumberOfConnectedComponentsInAnUndirectedGraph {
     // if not - attach parent with lesser rank to a bigger one, and update parent rank with a value of lesser rank.
     // each union means a decrement of a total num of elements (n), return whatever is left of n.
 
+    // you can do without rank (in Union-Find in general, not only here),
+    // but then you will create linked lists, instead of trees
+    // and search for parent in list would be much slower.
+    // so rank is just an optimization.
     int[] rank;
     int[] parent;
 
