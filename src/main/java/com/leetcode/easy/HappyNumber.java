@@ -34,20 +34,25 @@ public class HappyNumber {
     }
 
     // idea is similar to LinkedListCycle solution - use Floyd's tortoise and hare algorithm (fast and slow pointers)
+    // There will always be a cycle while you start summing squares of a number’s digits.
+    // Happy number’s cycle will start with 1, unhappy number’s with not 1.
+    //
+    //Examples:
+    // Number 2 is not happy, because cycle in its square loop starts not with 1:
+    //2 4 8 64 36+16=52 25+4=29 4+81=85(!) 64+25=89 64+81=145 1+16+25=42 8+4=12 1+4=5 25 4+25=29 4+81=85(!)
+    //
+    // Number 19 is happy because its square cycle starts with 1:
+    //19 1+81=82 64+4=68 36+64=100 1+0+0=1 1 1..
     public static boolean isHappy(int n) {
         int slow = n;
         int fast = n;
 
-        do { // safety for tricky case
+        do { // have to move them at least once before comparison
             slow = compute(slow);
             fast = compute(compute(fast));
-
-            if (slow == 1) {
-                return true;
-            }
         } while (slow != fast);
 
-        return false;
+        return slow == 1;
     }
 
     private static int compute(int n) {
