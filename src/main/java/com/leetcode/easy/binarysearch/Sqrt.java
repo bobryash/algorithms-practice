@@ -1,7 +1,7 @@
 package com.leetcode.easy.binarysearch;
 
 /**
- * #69
+ * #69. Sqrt(x)
  * <p>
  * Sqrt(x)
  * Given a non-negative integer x, return the square root of x rounded down to the nearest integer.
@@ -31,10 +31,36 @@ public class Sqrt {
     public static void main(String[] args) {
         System.out.println(Sqrt.mySqrt(16)); // 4
         System.out.println(Sqrt.mySqrt(8)); // 2
-        System.out.println(Sqrt.mySqrt(1));
+        System.out.println(Sqrt.mySqrt(1)); // 1
     }
 
+    // the idea - square root value of x is somewhere in 0...x
+    // use binary search to find it
     public static int mySqrt(int x) {
+        int left = 0;
+        int right = x;
+
+        while (left <= right) {
+            // since we use integer division here...
+            int mid = left + (right - left) / 2;
+            // use long here so integer won't overflow if there are big values
+            long product = (long) mid * mid;
+
+            if (product < x) {
+                left = mid + 1;
+            } else if (product > x) {
+                right = mid - 1;
+            } else {
+                return mid;
+            }
+        }
+
+        // ...we might've rounded down the 'right' value - nearest largest value to square root.
+        // so return it, if we got here
+        return right;
+    }
+
+    public static int mySqrt2(int x) {
         if (x == 0) return x;
 
         int left = 1;
